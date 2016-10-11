@@ -5,4 +5,4 @@ target/
 .classpath
 .settings/
 # ignore test file
-test/
+captcha/

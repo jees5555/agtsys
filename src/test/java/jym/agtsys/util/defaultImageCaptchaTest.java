@@ -14,7 +14,7 @@ public class defaultImageCaptchaTest {
 	
 	@Test
 	public void testDefaultImageCaptcha() throws Exception {
-		FileOutputStream fos =new FileOutputStream("catpcha/test.png");
+		FileOutputStream fos =new FileOutputStream("captcha/captcha.png");
 	    String cp=dic.generateCaptcha(fos);
 	    System.out.println(cp);
 	}

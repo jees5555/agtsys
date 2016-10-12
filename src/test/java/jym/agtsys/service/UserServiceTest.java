@@ -2,13 +2,18 @@ package jym.agtsys.service;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
 import jym.agtsys.dao.UserMapper;
 import jym.agtsys.domain.User;
+import jym.agtsys.service.impl.UserServiceImpl;
+import mockit.Expectations;
 import mockit.Injectable;
 import mockit.Tested;
 import mockit.Verifications;
+import mockit.integration.junit4.JMockit;
 
+@RunWith(JMockit.class)
 public class UserServiceTest {
     @Tested
 	UserService us;
@@ -17,14 +22,20 @@ public class UserServiceTest {
     
 	@Before
 	public void setUp() throws Exception {
-		
+		us = new UserServiceImpl();
 	}
-	/*@Test
+	@Test
 	public void testLogin() {
-		User u = new User();
-		u.setUsercode("admin");
-		u.setUserpassword("123456");
-		us.login(u);
+		//录制
+		new Expectations() {
+			{
+				um.selectUserByUser(withInstanceOf(User.class));
+				times=1;
+			}
+		};
+		//回放
+		us.login(new User());
+		//验证
 		new Verifications() {
 			{
 				um.selectUserByUser(withInstanceOf(User.class));
@@ -33,6 +44,6 @@ public class UserServiceTest {
 			
 		};
 		
-	}*/
+	}
 
 }

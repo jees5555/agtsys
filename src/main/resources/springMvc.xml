@@ -11,7 +11,7 @@
 
 <!-- 写controller bean 不需要引用 id可省略 name 就是浏览器上的访问地址-->
 
-<context:component-scan base-package="jym.agtsys.controllers" />
+<context:component-scan base-package="jym.agtsys.controller" />
 
 <!-- 自动配置注解映射器和注解适配器 -->
 <mvc:annotation-driven/>

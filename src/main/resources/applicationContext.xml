@@ -43,6 +43,8 @@
 <!-- ServiceConfig Start -->
 <!-- 注解配置service -->
 <context:component-scan base-package="jym.agtsys.service"/>
+<!-- 验证码组件 -->
+<bean class="jym.agtsys.util.DefaultImageCaptcha"></bean>
 <!-- ServiceConfig End -->
 
 </beans>

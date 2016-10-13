@@ -13,8 +13,22 @@
 
 <context:component-scan base-package="jym.agtsys.controller" />
 
-<!-- 自动配置注解映射器和注解适配器 -->
-<mvc:annotation-driven/>
+<!-- 数据校验验证器 -->
+<bean id="messageSourse" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+   <property name="basenames">
+     <list>
+       <value>classpath:customerValidateMessage</value>
+     </list>
+   </property>
+   <property name="defaultEncoding" value="utf-8" />
+   <property name="cacheSeconds" value="60" />
+</bean>
+<!-- 注册验证器 -->
+<mvc:annotation-driven validator="validator"/>
+<bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">
+ <property name="providerClass" value="org.hibernate.validator.HibernateValidator" />
+ <property name="validationMessageSource" ref="messageSourse"/>
+</bean>
 
 <!-- 配置视图解析器 -->
 <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver" >

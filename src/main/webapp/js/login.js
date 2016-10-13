@@ -7,19 +7,22 @@ $(function() {
 		title : '系统登录',
 		iconCls : "icon-ok",
 		width : 420,
-		height : 240,
-		closed : false,
+		height : 280,
+		closable: false,
+		draggable : false,
 		cache : false,
 		modal : true,
 		buttons:[{
 			text:'登录',
 			handler:function(){
-			 alert("login")
+				if($("#login-form").form('validate')){
+			        $("#login-form").submit();
+				}
 			}
 		},{
 			text:'重置',
 			handler:function(){
-				alert("reset")
+				$("#login-form").reset();
 			}
 		}]
 	})
@@ -34,6 +37,31 @@ function changeCaptcha(){
 $(document).ready(function(){
     $("#captchaButton").click(function(){
 	    $("#captchaImg").attr("src","captcha/get?random="+Math.random());
+	    $("#errors").html("");
 	})
 });
 
+
+
+//ajax判断验证码是否正确
+$(function() {
+$("#captcha").keyup(function(){
+	var captcha = $("#captcha").val();
+	if(captcha.length==4){
+	//启动ajax
+		$.ajax({
+			type: "POST",
+			url : "captcha/check",
+			data : "captcha="+captcha,
+			dataType : "text",
+			success : function(msg){
+				if(msg=="yes"){
+					$("#errors").html("<p style='color: green'>验证码正确</p>");
+				}else{
+					$("#errors").html("<p style='color: red'>验证码错误</p>");
+				}
+			}
+		})
+	}
+})
+})

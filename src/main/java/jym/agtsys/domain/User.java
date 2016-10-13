@@ -2,15 +2,20 @@ package jym.agtsys.domain;
 
 import java.util.Date;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 import jym.agtsys.util.MD5;
+import jym.agtsys.validate.LoginValidateGroup;
 
 public class User {
     private Long id;
-
+    
+    @NotEmpty(message="{user.usercode.isempty}",groups={LoginValidateGroup.class})
     private String usercode;
 
     private String username;
 
+    @NotEmpty(message="{user.userpassword.isempty}",groups={LoginValidateGroup.class})
     private String userpassword;
 
     private Date creationtime;
@@ -54,7 +59,7 @@ public class User {
     }
 
     public void setUserpassword(String userpassword) {
-        this.userpassword = userpassword == null ? null : MD5.md5encode(userpassword.trim());
+        this.userpassword = (userpassword == null || userpassword.equals("")) ? null : MD5.md5encode(userpassword.trim());
     }
 
     public Date getCreationtime() {

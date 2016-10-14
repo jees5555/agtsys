@@ -4,24 +4,17 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
-<META HTTP-EQUIV="Cache-Control" CONTENT="no-cache">
-<META HTTP-EQUIV="Expires" CONTENT="0">
 <title>登录</title>
-<base href="${pageContext.request.contextPath}/">
-<link rel="stylesheet" type="text/css" href="js/jquery-easyui-1.5/themes/default/easyui.css">
-<link rel="stylesheet" type="text/css" href="js/jquery-easyui-1.5/themes/icon.css">
-<link rel="stylesheet" type="text/css" href="css/reset.css">
-<script type="text/javascript" src="js/jquery-easyui-1.5/jquery.min.js"></script>
-<script type="text/javascript" src="js/jquery-easyui-1.5/jquery.easyui.min.js"></script>
-<script type="text/javascript" src="js/jquery-easyui-1.5/easyui-lang-zh_CN.js"></script>
+<!-- 静态导入 -->
+<%@ include file="head.html" %>
 <script type="text/javascript" src="js/login.js"></script>
 </head>
-<body >
-<img  src=${pageContext.request.contextPath}/images/background.jpg align=left 
-onload="this.width=document.body.clientWidth;">
-<div id="login-div" >
+<body style="overflow: hidden;">
+<div>
+	<img  src=images/background.jpg align=left 
+        onload="this.width=screen.availWidth;">
+</div>
+<div id="login-div">
 <form id="login-form" action="user/login" method="post" style="padding-left:30px;padding-top: 15px"> 
 <div id="errors" class="h30 lh28">
      <c:if test="${!empty captchaError }">
@@ -53,5 +46,6 @@ onload="this.width=document.body.clientWidth;">
        
 </form>  
 </div>
+
 </body>
 </html>

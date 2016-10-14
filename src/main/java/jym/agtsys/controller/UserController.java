@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -22,9 +23,14 @@ public class UserController {
 	@Resource
 	private UserService us ;
 	
-	@RequestMapping(value={"user/login","/"},method=RequestMethod.GET)
+	@RequestMapping(value={"login","/"},method=RequestMethod.GET)
 	public String login(){
 		return "login";
+	}
+	@RequestMapping(value={"logout"},method=RequestMethod.GET)
+	public String logout(HttpSession session){
+		session.removeAttribute(WebContants.SESSION_LOGIN_KEY);
+		return "redirect:/login";
 	}
 	
 	@RequestMapping(value={"user/login"},method=RequestMethod.POST)
@@ -44,7 +50,19 @@ public class UserController {
 			request.setAttribute("loginError", WebContants.LOGIN_ERROR_MESSAGE);
 			return "login";
 		}else{
-			return "main";
+			request.getSession().setAttribute(WebContants.SESSION_LOGIN_KEY, user);
+			return "redirect:/main";
 		}
 	}
+	
+	@RequestMapping("main")
+	public String main(){
+		return "main";
+	}
+	
+	@RequestMapping(value={"user/updatePassword"},method=RequestMethod.GET)
+	public String updatePassword(){
+		return "updatePassword";
+	}
+	
 }

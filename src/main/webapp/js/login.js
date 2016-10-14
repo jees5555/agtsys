@@ -11,7 +11,6 @@ $(function() {
 		closable: false,
 		draggable : false,
 		cache : false,
-		modal : true,
 		buttons:[{
 			text:'登录',
 			handler:function(){
@@ -26,26 +25,13 @@ $(function() {
 			}
 		}]
 	})
-})
-
-
-
-function changeCaptcha(){
-	document.getElementById("captchaImg").src="captcha/get?random="+Math.random();
-}
-
-$(document).ready(function(){
-    $("#captchaButton").click(function(){
-	    $("#captchaImg").attr("src","captcha/get?random="+Math.random());
-	    $("#errors").html("");
+	//刷新验证码
+	  $("#captchaButton").click(function(){
+	      $("#captchaImg").attr("src","captcha/get?random="+Math.random());
+	      $("#errors").html("");
 	})
-});
-
-
-
-//ajax判断验证码是否正确
-$(function() {
-$("#captcha").keyup(function(){
+	//ajax判断验证码是否正确
+	$("#captcha").keyup(function(){
 	var captcha = $("#captcha").val();
 	if(captcha.length==4){
 	//启动ajax
@@ -64,4 +50,13 @@ $("#captcha").keyup(function(){
 		})
 	}
 })
+
 })
+
+
+
+function changeCaptcha(){
+	document.getElementById("captchaImg").src="captcha/get?random="+Math.random();
+}
+
+

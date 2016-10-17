@@ -6,46 +6,6 @@
 <title>代理商管理系统</title>
 <%@ include file="head.html" %>
 <script type="text/javascript" src="js/main.js"></script>
-<script type="text/javascript">
-$(function(){
-	$('#tree').tree({
-		data: [{
-			text: '父菜单1',
-			state: 'closed',
-			children: [{
-				text: '子菜单1'
-			},{
-				text: '子菜单2'
-			}]
-		},{
-			text: '父菜单2'
-		}],
-		onClick: function(node){
-			//判断选项卡是否存在，存在则选中
-			if($('#tabs').tabs('exists',node.text)){
-				$('#tabs').tabs('select',node.text)
-			}else{
-			//不存在则打开
-			createTab(node);
-			}
-		}	
-	});	
-})
-// 创建一个新的选项卡    
-function createTab(node){
-	$('#tabs').tabs('add',{    
-	    title: node.text,    
-	    content: node.text,    
-	    closable:true,    
-	    tools:[{    
-	        iconCls:'icon-mini-refresh',    
-	        handler:function(){    
-	            alert('refresh');    
-	        }    
-	    }]    
-	});  
-}
-</script>
 </head>
 <body class="easyui-layout">  
     <!-- 页面头部 -->  
@@ -77,7 +37,8 @@ function createTab(node){
     <div data-options="region:'west',title:'导航菜单',split:true" style="width:200px;">
      <!-- 树形功能菜单 -->  
 	     <ul id="tree"></ul>  
-    </div >   
+    </div >
+    <!-- 主页面，tabs -->   
       <div data-options="region:'center'" style="padding:5px;background:#eee;">
          <div id="tabs" class="easyui-tabs" style="width:500px;height:250px;" fit="true"></div>  
     </div>

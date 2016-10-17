@@ -21,7 +21,7 @@ $(function() {
 		},{
 			text:'重置',
 			handler:function(){
-				$("#login-form").reset();
+				$("#login-form")[0].reset();
 			}
 		}]
 	})
@@ -41,7 +41,7 @@ $(function() {
 			data : "captcha="+captcha,
 			dataType : "text",
 			success : function(msg){
-				if(msg=="yes"){
+				if(msg=="success"){
 					$("#errors").html("<p style='color: green'>验证码正确</p>");
 				}else{
 					$("#errors").html("<p style='color: red'>验证码错误</p>");

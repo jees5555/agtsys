@@ -6,4 +6,8 @@ public interface UserService {
 	
 User login(User user);
 
+User checkOldPassword(User user);
+
+int updateUser(User user);
+
 }

@@ -5,6 +5,8 @@ import jym.agtsys.domain.User;
 public interface UserMapper {
 	User selectUserByUser(User user);
 	
+	int updateUser(User user);
+	
     int deleteByPrimaryKey(Long id);
 
     int insert(User record);
@@ -12,8 +14,6 @@ public interface UserMapper {
     int insertSelective(User record);
 
     User selectByPrimaryKey(Long id);
-
-    int updateByPrimaryKeySelective(User record);
 
     int updateByPrimaryKey(User record);
 }

@@ -6,5 +6,5 @@ import jym.agtsys.domain.Function;
 import jym.agtsys.domain.Role;
 
 public interface FunctionService {
-	List<Function> selectFuntionsByRole(Role role);
+	List<Function> selectFuntionsByRole(Role role)  throws Exception;
 }

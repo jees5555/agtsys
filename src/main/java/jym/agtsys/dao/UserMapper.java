@@ -3,9 +3,9 @@ package jym.agtsys.dao;
 import jym.agtsys.domain.User;
 
 public interface UserMapper {
-	User selectUserByUser(User user);
+	User selectUserByUser(User user)  throws Exception;
 	
-	int updateUser(User user);
+	int updateUser(User user)  throws Exception;
 	
     int deleteByPrimaryKey(Long id);
 

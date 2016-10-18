@@ -15,7 +15,7 @@ public class UserServiceImpl implements UserService{
     private UserMapper um;
 	
 	@Override
-	public User login(User user) {
+	public User login(User user) throws Exception {
 		user = um.selectUserByUser(user);
 		if(user!=null){
 			User u =new User();
@@ -27,12 +27,12 @@ public class UserServiceImpl implements UserService{
 	}
 
 	@Override
-	public User checkOldPassword(User user) {
+	public User checkOldPassword(User user) throws Exception {
 		return um.selectUserByUser(user);
 	}
 
 	@Override
-	public int updateUser(User user) {
+	public int updateUser(User user) throws Exception {
 		return um.updateUser(user);
 	}
 

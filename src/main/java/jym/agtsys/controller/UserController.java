@@ -22,26 +22,20 @@ import jym.agtsys.service.UserService;
 import jym.agtsys.validate.LoginValidateGroup;
 
 @Controller
+@RequestMapping("user")
 public class UserController {
 	@Resource
 	private UserService us ;
-	
-	//进入登陆页面
-	@RequestMapping(value={"login","/"},method=RequestMethod.GET)
-	public String login(){
-		return "login";
-	}
 	
 	//执行登出
 	@RequestMapping(value={"logout"},method=RequestMethod.GET)
 	public String logout(HttpSession session){
 		session.removeAttribute(SESSION_LOGIN_KEY);
-		return "redirect:/login";
+		return "redirect:/";
 	}
-	
 	//执行登录
-	@RequestMapping(value={"user/login"},method=RequestMethod.POST)
-	public String doLogin(String captcha,@Validated(value={LoginValidateGroup.class}) User user,BindingResult result,HttpServletRequest request){
+	@RequestMapping(value={"login"},method=RequestMethod.POST)
+	public String doLogin(String captcha,@Validated(value={LoginValidateGroup.class}) User user,BindingResult result,HttpServletRequest request) throws Exception{
 		String sessionCaptcha =(String)request.getSession().getAttribute(WebContants.SESSION_CAPTCHA_KEY);
 		if(!captcha.equalsIgnoreCase(sessionCaptcha)){
 			request.setAttribute("captchaError", CAPTCHA_ERROR_MESSAGE);
@@ -63,15 +57,15 @@ public class UserController {
 	}
 		
 	//进入修改密码页面
-	@RequestMapping(value={"user/updatePassword"},method=RequestMethod.GET)
+	@RequestMapping(value={"updatePassword"},method=RequestMethod.GET)
 	public String updatePassword(){
 		return "updatePassword";
 	}
 	
 	//验证旧密码是否正确
-	@RequestMapping(value={"user/passwordCheck"},method=RequestMethod.POST)
+	@RequestMapping(value={"passwordCheck"},method=RequestMethod.POST)
 	@ResponseBody
-	public String passwordCheck(String oldpassword,HttpSession session){
+	public String passwordCheck(String oldpassword,HttpSession session) throws Exception{
 		User user =(User)session.getAttribute(SESSION_LOGIN_KEY);
 		user.setUserpassword(oldpassword);
 		user=us.checkOldPassword(user);
@@ -83,9 +77,9 @@ public class UserController {
 	}
 	
 	//修改密码
-	@RequestMapping(value={"user/doUpdatePassword"},method=RequestMethod.POST)
+	@RequestMapping(value={"doUpdatePassword"},method=RequestMethod.POST)
 	@ResponseBody
-	public String doUpdatePassword(String newpassword,HttpSession session){
+	public String doUpdatePassword(String newpassword,HttpSession session) throws Exception{
 		User user =(User)session.getAttribute(SESSION_LOGIN_KEY);
 		User u =new User();
 		u.setLastupdatetime(new Date());

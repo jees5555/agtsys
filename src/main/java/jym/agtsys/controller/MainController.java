@@ -34,7 +34,7 @@ public class MainController {
 	//加载树形菜单
 	@RequestMapping("tree")
 	@ResponseBody
-	public Object getTree(HttpSession session){
+	public Object getTree(HttpSession session) throws Exception{
 		User user =(User) session.getAttribute(SESSION_LOGIN_KEY);
 		Role role =new Role();
 		role.setId(user.getRoleid());

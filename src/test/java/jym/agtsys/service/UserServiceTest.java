@@ -25,7 +25,7 @@ public class UserServiceTest {
 		us = new UserServiceImpl();
 	}
 	@Test
-	public void testLogin() {
+	public void testLogin() throws Exception {
 		//录制
 		new Expectations() {
 			{

@@ -6,7 +6,7 @@ import jym.agtsys.domain.Function;
 import jym.agtsys.domain.Role;
 
 public interface FunctionMapper {
-	List<Function> selectFuntionsByRole(Role role);
+	List<Function> selectFuntionsByRole(Role role)  throws Exception;
 	
     int deleteByPrimaryKey(Long id);
 

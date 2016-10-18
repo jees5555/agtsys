@@ -19,7 +19,7 @@ public class UserMapperTest {
 	}
 	
 	@Test
-	public void selectUserByUser(){
+	public void selectUserByUser() throws Exception{
 		User user =new User();
 		user.setUsercode("admin");
 		user.setUserpassword("123456");

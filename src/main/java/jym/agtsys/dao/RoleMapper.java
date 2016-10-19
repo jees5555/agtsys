@@ -12,13 +12,14 @@ public interface RoleMapper {
 	
 	int addRole(Role role) throws Exception;
 	
-    int deleteByPrimaryKey(Long id);
+	int updateRole(Role role) throws Exception;
+	
+    int deleteRole(Role role) throws Exception;
 
+    
     int insert(Role record);
 
     Role selectByPrimaryKey(Long id);
-
-    int updateByPrimaryKeySelective(Role record);
 
     int updateByPrimaryKey(Role record);
 }

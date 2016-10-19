@@ -5,6 +5,7 @@
 $('#roledg').datagrid({    
     url:'role/list',
     columns:[[
+        {field:'choose',checkbox:true},      
         {field:'id',title:'id',width:100,hidden:true},        
         {field:'rolename',title:'角色名称',width:100,align:'center'},    
         {field:'creationtime',title:'创建时间',width:200,align:'center',
@@ -38,13 +39,27 @@ $('#roledg').datagrid({
 		iconCls: 'icon-edit',
 		text:'修改',
 		handler: function(){
-			
+			var row =$("#roledg").datagrid('getSelected');
+			if(row==null){
+				$.messager.alert('提示','请选择你要修改的角色','warning');
+			}else{
+			showUpdateRole(row);
+			}
 		}
 	},'-',{
 		iconCls: 'icon-remove',
 		text:'删除',
 		handler: function(){
-			
+			var row =$("#roledg").datagrid('getSelected');
+			if(row==null){
+				$.messager.alert('提示','请选择删除修改的角色','warning');
+			}else{
+				$.messager.confirm('确认','您确认想要删除角色['+row.rolename+']吗？',function(r){    
+				    if (r){    
+				    	deleteRole(row);
+				    }    
+				});  
+			}
 		}
 	}]
 
@@ -70,7 +85,7 @@ function showAddRole(){
 		width : 300,
 		height : 220,
 		cache : false,
-		href : 'role/addRole',
+		href : 'role/add/',
 		modal : true,
 		buttons:[{
 			text:'添加',
@@ -85,31 +100,47 @@ function showAddRole(){
 		}]
 	})
 }
-//添加角色
-function addRole() {
-	if($("#formbox").form('validate')){
-		//验证角色是否存在
-		if(validateRoleName($("#rolename").val())){
-			//添加角色
-			$.ajax({
-				type: "POST",
-				url : "role/doAddRole",
-				data : "rolename="+$("#rolename").val()+"&isstart="+$("#isstart").val(),
-				dataType : "text",
-				async : false,
-				success : function(msg){
-					if(msg=="success"){
-						$.messager.alert('修改提示','添加角色成功！','info')
-						$("#formbox").dialog('close');
-						$("#roledg").datagrid('reload');
-					}else{
-						$.messager.alert('修改提示','添加角色失败！','error')
-					}
-				}
-			})
-			
-		}	
-		
-	}
+//载入修改页面
+function showUpdateRole(row){
+	$("#formbox").dialog({
+		title : '修改角色',
+		iconCls : "icon-ok",
+		width : 300,
+		height : 220,
+		cache : false,
+		href : 'role/update/'+row.id,
+		modal : true,
+		buttons:[{
+			text:'修改',
+			handler:function(){
+				updateRole();
+			}
+		},{
+			text:'取消',
+			handler:function(){
+				$("#formbox").dialog('close');
+			}
+		}]
+	})
 }
+//删除角色
+function deleteRole(row) {
+	$.ajax({
+		type: "post",
+		url : "role/delete/",
+		data : "id="+row.id,
+		dataType : "text",
+		async : false,
+		success : function(msg){
+			if(msg=="success"){
+				$("#roledg").datagrid('reload');
+				$.messager.alert('删除提示','删除角色['+row.rolename+']成功','info');
+			}else{
+				$.messager.alert('删除提示','删除角色['+row.rolename+']失败','error');
+			}
+		}
+	})
+}
+
+
 </script>

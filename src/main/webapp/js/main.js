@@ -9,9 +9,21 @@ $(function(){
 			}
 		}
 	})
+	
+
 	//加载树形目录
 	$('#tree').tree({
 		url : "main/tree",
+		onLoadSuccess:function(node,data){
+			//收起所有菜单
+			$('#tree').tree('collapseAll');
+			//展开菜单
+			$.each(data,function(index,node){
+				if(node.text=='系统管理'){
+					$('#tree').tree('expand',node.target);
+				}
+			});
+		},
 		onClick: function(node){
 		   if(node.attributes.url!=""){
 			//判断选项卡是否存在，存在则选中
@@ -48,32 +60,6 @@ function showUpdatePassword() {
 			}
 		}]
 	})
-}
-//修改密码
-function updatePassword() {
-	if($("#formbox").form('validate')){
-		//验证旧密码
-		if(validateOldPwd($("#oldpassword").val())){
-			//修改密码
-			$.ajax({
-				type: "POST",
-				url : "user/doUpdatePassword",
-				data : "newpassword="+$("#newpassword").val(),
-				dataType : "text",
-				async : false,
-				success : function(msg){
-					if(msg=="success"){
-						$.messager.alert('修改提示','修改密码成功！','info')
-						$("#formbox").dialog('close');
-					}else{
-						$.messager.alert('修改提示','修改密码失败！','error')
-					}
-				}
-			})
-			
-		}	
-		
-	}
 }
 
 // 创建一个新的选项卡    

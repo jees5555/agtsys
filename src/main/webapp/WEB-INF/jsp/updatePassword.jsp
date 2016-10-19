@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<form id="updatePassword" action="#" method="post" style="padding-left:30px;padding-top: 15px"> 
+<form id="updatePassword" action="user/doUpdatePassword" method="post" style="padding-left:30px;padding-top: 15px"> 
    <div id="errors" class="h30 lh28">
    </div>
     <div class="h30 lh28">   
@@ -28,6 +28,10 @@ $.extend($.fn.validatebox.defaults.rules, {
 });  
 
 function validateOldPwd(oldpassword){
+	if(oldpassword==""){
+		$("#errors").html("");
+		return;
+	}
 	var flag =false;
 	$.ajax({
 		type: "POST",
@@ -46,7 +50,27 @@ function validateOldPwd(oldpassword){
 	})
 	return flag;
 }
-
+//修改密码
+function updatePassword() {
+	if($("#formbox").form('validate')){
+		//验证旧密码
+		if(validateOldPwd($("#oldpassword").val())){
+			//修改密码
+			$("#updatePassword").form('submit',{
+				success : function(msg){
+					if(msg=="success"){
+						$.messager.alert('修改提示','修改密码成功！','info')
+						$("#formbox").dialog('close');
+					}else{
+						$.messager.alert('修改提示','修改密码失败！','error')
+					}
+				}
+			})
+		}	
+		
+	}
+}
+//自动验证旧密码
 $("#oldpassword").blur(function(){
 	validateOldPwd($(this).val());
 })

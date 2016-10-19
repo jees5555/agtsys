@@ -29,4 +29,14 @@ public class RoleServiceImpl implements RoleService{
 		return rm.addRole(role);
 	}
 
+	@Override
+	public int updateRole(Role role) throws Exception {
+		return rm.updateRole(role);
+	}
+
+	@Override
+	public int deleteRole(Role role) throws Exception {
+		return rm.deleteRole(role);
+	}
+
 }

@@ -1,18 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<form id="addRole" action="role/add" method="post" style="padding-left:30px;padding-top: 15px"> 
+<form id="updateRole" action="role/update" method="post" style="padding-left:30px;padding-top: 15px"> 
    <div id="errors" class="h30 lh28">
    </div>
+   <input id="id" type="hidden" name="id" value="${role.id }"/>
     <div class="h30 lh28">   
         <label for="rolename">角色名称:</label>   
-        <input id="rolename" class="easyui-validatebox" type="text" name="rolename" onblur="validateRoleName(this.value);"
+        <input id="rolename" class="easyui-validatebox" type="text" name="rolename" value="${role.rolename }" onblur="validateRoleName(this.value);" 
         data-options="required:true" missingMessage="请输入角色名称"/>   
     </div>   
     <div class="h30 lh28">   
        <label for="isstart">是否启用:</label>
        <select id="isstart" name="isstart">
-       <option value="1" selected="selected">启用</option>
-       <option value="0">不启用</option>
+       <option value="1" ${role.isstart==1?"selected='selected'":"" }>启用</option>
+       <option value="0" ${role.isstart==0?"selected='selected'":"" }>不启用</option>
        </select>
     </div>   
 </form>
@@ -48,19 +49,19 @@ function validateRoleName(rolename){
 }
 
 //添加角色
-function addRole() {
+function updateRole() {
 	if($("#formbox").form('validate')){
 		//验证角色是否存在
 		if(validateRoleName($("#rolename").val())){
 			//添加角色
-			$("#addRole").form('submit',{
+			$("#updateRole").form('submit',{
 				success : function(msg){
 					if(msg=="success"){
-						$.messager.alert('修改提示','添加角色['+$("#rolename").val()+']成功！','info')
+						$.messager.alert('修改提示','修改角色['+$("#rolename").val()+']成功！','info')
 						$("#formbox").dialog('close');
 						$("#roledg").datagrid('reload');
 					}else{
-						$.messager.alert('修改提示','添加角色['+$("#rolename").val()+']失败！','error')
+						$.messager.alert('修改提示','修改角色['+$("#rolename").val()+']失败！','error')
 					}
 				}
 			})

@@ -15,6 +15,9 @@
   <select id="selectRoleByRole" parameterType="role" resultType="role">
   select * from as_role
   <where>
+      <if test="id != null" >
+       and id=#{id}
+      </if>
       <if test="rolename != null">
         and roleName=#{rolename}
       </if>
@@ -76,29 +79,7 @@
     </trim>
   </insert>
   
-  <sql id="Base_Column_List">
-    id, roleName, creationTime, createdBy, lastUpdateTime, isStart
-  </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from as_role
-    where id = #{id,jdbcType=BIGINT}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
-    delete from as_role
-    where id = #{id,jdbcType=BIGINT}
-  </delete>
-  <insert id="insert" parameterType="jym.agtsys.domain.Role">
-    insert into as_role (id, roleName, creationTime, 
-      createdBy, lastUpdateTime, isStart
-      )
-    values (#{id,jdbcType=BIGINT}, #{rolename,jdbcType=VARCHAR}, #{creationtime,jdbcType=TIMESTAMP}, 
-      #{createdby,jdbcType=VARCHAR}, #{lastupdatetime,jdbcType=TIMESTAMP}, #{isstart,jdbcType=INTEGER}
-      )
-  </insert>
- 
-  <update id="updateByPrimaryKeySelective" parameterType="jym.agtsys.domain.Role">
+  <update id="updateRole" parameterType="role">
     update as_role
     <set>
       <if test="rolename != null">
@@ -119,6 +100,33 @@
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
+  
+  <delete id="deleteRole" parameterType="role">
+    delete from as_role
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  
+  
+  
+  
+  <sql id="Base_Column_List">
+    id, roleName, creationTime, createdBy, lastUpdateTime, isStart
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from as_role
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  
+  <insert id="insert" parameterType="jym.agtsys.domain.Role">
+    insert into as_role (id, roleName, creationTime, 
+      createdBy, lastUpdateTime, isStart
+      )
+    values (#{id,jdbcType=BIGINT}, #{rolename,jdbcType=VARCHAR}, #{creationtime,jdbcType=TIMESTAMP}, 
+      #{createdby,jdbcType=VARCHAR}, #{lastupdatetime,jdbcType=TIMESTAMP}, #{isstart,jdbcType=INTEGER}
+      )
+  </insert>
   <update id="updateByPrimaryKey" parameterType="jym.agtsys.domain.Role">
     update as_role
     set roleName = #{rolename,jdbcType=VARCHAR},

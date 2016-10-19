@@ -11,4 +11,8 @@ public interface RoleService {
 	Role checkRoleExist (Role role) throws Exception;
 	
 	int addRole (Role role) throws Exception;
+	
+	int updateRole(Role role) throws Exception;
+	
+	  int deleteRole(Role role) throws Exception;
 }

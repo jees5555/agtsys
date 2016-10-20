@@ -52,7 +52,7 @@ $('#roledg').datagrid({
 		handler: function(){
 			var row =$("#roledg").datagrid('getSelected');
 			if(row==null){
-				$.messager.alert('提示','请选择删除修改的角色','warning');
+				$.messager.alert('提示','请选择删除的角色','warning');
 			}else{
 				$.messager.confirm('确认','您确认想要删除角色['+row.rolename+']吗？',function(r){    
 				    if (r){    

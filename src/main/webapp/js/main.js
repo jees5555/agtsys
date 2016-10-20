@@ -19,7 +19,7 @@ $(function(){
 			$('#tree').tree('collapseAll');
 			//展开菜单
 			$.each(data,function(index,node){
-				if(node.text=='系统管理'){
+				if(node.text=='系统管理'||node.text=='系统配置管理'){
 					$('#tree').tree('expand',node.target);
 				}
 			});

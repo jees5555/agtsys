@@ -29,6 +29,8 @@ public class User {
     private Integer isstart;
 
     private Long roleid;
+    
+    private String rolename;
 
     public Long getId() {
         return id;
@@ -109,4 +111,13 @@ public class User {
     public void setRoleid(Long roleid) {
         this.roleid = roleid;
     }
+
+	public String getRolename() {
+		return rolename;
+	}
+
+	public void setRolename(String rolename) {
+		this.rolename = rolename;
+	}
+    
 }

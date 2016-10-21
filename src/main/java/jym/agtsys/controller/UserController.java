@@ -1,7 +1,9 @@
 package jym.agtsys.controller;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -9,6 +11,7 @@ import javax.servlet.http.HttpSession;
 
 import static jym.agtsys.constants.WebContants.*;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.validation.annotation.Validated;
@@ -17,8 +20,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import jym.agtsys.constants.WebContants;
+import jym.agtsys.domain.Role;
 import jym.agtsys.domain.User;
+import jym.agtsys.service.RoleService;
 import jym.agtsys.service.UserService;
+import jym.agtsys.util.MySqlPageTool;
 import jym.agtsys.validate.LoginValidateGroup;
 
 @Controller
@@ -26,6 +32,8 @@ import jym.agtsys.validate.LoginValidateGroup;
 public class UserController {
 	@Resource
 	private UserService us ;
+	@Resource
+	private RoleService rs ;
 	
 	//执行登出
 	@RequestMapping(value={"logout"},method=RequestMethod.GET)
@@ -91,4 +99,21 @@ public class UserController {
 			return OPERATE_FAILURE;
 		}
 	}
+	
+	//返回用户管理页面
+	@RequestMapping("manage")
+	public String getUserManage (Model model) throws Exception{
+		List<Role> roles =rs.selectAllRoles();
+		model.addAttribute("roles", roles);
+		return "usermanage";
+	}
+	//返回用户列表数据
+	@RequestMapping("list")
+	@ResponseBody
+	  public Object getUserList(User user,Integer page,Integer rows) throws Exception{
+		Map <String,Object> map =new HashMap<String,Object>();
+		map.put("total", us.getUsersCount(user));
+		map.put("rows", us.getPageUsersByUser(user, new MySqlPageTool(page, rows)));
+	    return map;
+	    }
 }

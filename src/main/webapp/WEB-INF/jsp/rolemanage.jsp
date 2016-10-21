@@ -27,6 +27,7 @@ $('#roledg').datagrid({
        }
     ]],
     //表格属性
+    fitColumns : true,
     singleSelect: true,   
     //工具栏
     toolbar: [{

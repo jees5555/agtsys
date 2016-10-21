@@ -1,6 +1,7 @@
 package jym.agtsys.service.impl;
 
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Service;
 import jym.agtsys.dao.UserMapper;
 import jym.agtsys.domain.User;
 import jym.agtsys.service.UserService;
+import jym.agtsys.util.MySqlPageTool;
 
 @Service
 public class UserServiceImpl implements UserService{
@@ -34,6 +36,16 @@ public class UserServiceImpl implements UserService{
 	@Override
 	public int updateUser(User user) throws Exception {
 		return um.updateUser(user);
+	}
+
+	@Override
+	public List<User> getPageUsersByUser(User user, MySqlPageTool pageTool) throws Exception {
+		return um.selectPageUsersByUser(user, pageTool);
+	}
+
+	@Override
+	public int getUsersCount(User user) throws Exception {
+		return um.selectUsersCount(user);
 	}
 
 }

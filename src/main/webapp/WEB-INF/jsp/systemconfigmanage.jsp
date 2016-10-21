@@ -7,9 +7,9 @@ $('#systemconfigdg${configtype}').datagrid({
     url:'systemconfig/list/${configtype}',
     columns:[[       
         {field:'configtypename',title:'配置类型',width:200,align:'center'}, 
-        <c:if test="${configtype==2 ||configtype==3 ||configtype==4||configtype==7}">
+        //<c:if test="${configtype==2 ||configtype==3 ||configtype==4||configtype==7}">
         {field:'configvalue',title:'配置数值',width:300,align:'center',}, 
-        </c:if>
+        //</c:if>
         {field:'isstart',title:'是否启用',width:100,align:'center',
         formatter: function(value){
         	switch(value){
@@ -27,15 +27,20 @@ $('#systemconfigdg${configtype}').datagrid({
        },
        {field:'id',title:'操作',width:100,align:'center',
            formatter: function(value,row,index){
-        	   return "<a href='#'>修改</a><c:if test="${configtype==1 ||configtype==5 ||configtype==6||configtype==7}">|<a href='javascript:deleteSystemConfig("+value+",\""+row.configtypename+"\");'>删除</a></c:if>";
+        	   return "<a href='#'>修改</a>"+
+        	   "<c:if test="${configtype==1 ||configtype==5 ||configtype==6||configtype==7}">"+
+        	   "|"+
+        	   "<a href='javascript:deleteSystemConfig("+value+",\""+row.configtypename+"\");'>删除</a>"+
+        	   "</c:if>";
          }}
     ]],
     //表格属性
+    fitColumns : true,
     singleSelect: true,
     rownumbers :true,
     //工具栏
     toolbar:[
-       <c:if test="${configtype !=3 && configtype !=4}">
+     //<c:if test="${configtype !=3 && configtype !=4}">
        {
 		iconCls: 'icon-add',
 		text:'添加',
@@ -43,7 +48,7 @@ $('#systemconfigdg${configtype}').datagrid({
 			showAddSystemConfig("${configtype}");
 		        }
 	    }
-        </c:if>
+     //</c:if>
     ]
 });  
 
@@ -73,7 +78,7 @@ function showAddSystemConfig(configtype){
 }
 //载入修改页面
 function showUpdateSystemConfig(id,configtype){
-	/* $("#formbox").dialog({
+	$("#formbox").dialog({
 		title : '修改角色',
 		iconCls : "icon-ok",
 		width : 300,
@@ -92,7 +97,7 @@ function showUpdateSystemConfig(id,configtype){
 				$("#formbox").dialog('close');
 			}
 		}]
-	}) */
+	}) 
 } 
 //删除系统配置
 function deleteSystemConfig(id,configtypename) {

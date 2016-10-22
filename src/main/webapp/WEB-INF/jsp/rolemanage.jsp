@@ -82,7 +82,7 @@ function formatDate(date){
 function showAddRole(){
 	$("#formbox").dialog({
 		title : '添加角色',
-		iconCls : "icon-ok",
+		iconCls : "icon-add",
 		width : 300,
 		height : 220,
 		cache : false,
@@ -105,7 +105,7 @@ function showAddRole(){
 function showUpdateRole(row){
 	$("#formbox").dialog({
 		title : '修改角色',
-		iconCls : "icon-ok",
+		iconCls : "icon-edit",
 		width : 300,
 		height : 220,
 		cache : false,

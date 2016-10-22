@@ -12,6 +12,11 @@
   <sql id="Base_Column_List">
     id, configType, configTypeName, configTypeValue, configValue, isStart
   </sql>
+  <select id="selectSystemConfigById" parameterType="systemConfig" resultType="systemConfig">
+    select
+    <include refid="Base_Column_List" />
+    from as_systemconfig where id =#{id}
+  </select>
   <select id="selectSystemConfigByConfigType" parameterType="systemConfig" resultType="systemConfig">
     select
     <include refid="Base_Column_List" />
@@ -71,21 +76,7 @@
       </if>
     </trim>
   </insert>
-  <delete id="deleteSystemConfig" parameterType="systemConfig">
-    delete from as_systemconfig
-    where id = #{id,jdbcType=BIGINT}
-  </delete>
-  
-  <insert id="insert" parameterType="jym.agtsys.domain.SystemConfig">
-    insert into as_systemconfig (id, configType, configTypeName, 
-      configTypeValue, configValue, isStart
-      )
-    values (#{id,jdbcType=BIGINT}, #{configtype,jdbcType=INTEGER}, #{configtypename,jdbcType=VARCHAR}, 
-      #{configtypevalue,jdbcType=INTEGER}, #{configvalue,jdbcType=VARCHAR}, #{isstart,jdbcType=INTEGER}
-      )
-  </insert>
- 
-  <update id="updateByPrimaryKeySelective" parameterType="jym.agtsys.domain.SystemConfig">
+  <update id="updateSystemConfig" parameterType="systemConfig">
     update as_systemconfig
     <set>
       <if test="configtype != null">
@@ -106,6 +97,23 @@
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
+  
+  
+  <delete id="deleteSystemConfig" parameterType="systemConfig">
+    delete from as_systemconfig
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  
+  <insert id="insert" parameterType="jym.agtsys.domain.SystemConfig">
+    insert into as_systemconfig (id, configType, configTypeName, 
+      configTypeValue, configValue, isStart
+      )
+    values (#{id,jdbcType=BIGINT}, #{configtype,jdbcType=INTEGER}, #{configtypename,jdbcType=VARCHAR}, 
+      #{configtypevalue,jdbcType=INTEGER}, #{configvalue,jdbcType=VARCHAR}, #{isstart,jdbcType=INTEGER}
+      )
+  </insert>
+ 
+  
   <update id="updateByPrimaryKey" parameterType="jym.agtsys.domain.SystemConfig">
     update as_systemconfig
     set configType = #{configtype,jdbcType=INTEGER},

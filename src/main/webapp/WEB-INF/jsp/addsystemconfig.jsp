@@ -61,11 +61,11 @@ function addSystemConfig() {
 		$("#addSystemConfig").form('submit',{
 				success : function(msg){
 					if(msg=="success"){
-						$.messager.alert('修改提示','添加配置类型['+$("#configtypename").val()+']成功！','info')
+						$.messager.alert('添加提示','添加配置类型['+$("#configtypename").val()+']成功！','info')
 						$("#formbox").dialog('close');
 						$('#systemconfigdg${configtype}').datagrid('reload');
 					}else{
-						$.messager.alert('修改提示','添加配置类型['+$("#configtypename").val()+']失败！','error')
+						$.messager.alert('添加提示','添加配置类型['+$("#configtypename").val()+']失败！','error')
 					}
 				}
 			}) 

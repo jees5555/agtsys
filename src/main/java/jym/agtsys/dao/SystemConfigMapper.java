@@ -5,6 +5,7 @@ import java.util.List;
 import jym.agtsys.domain.SystemConfig;
 
 public interface SystemConfigMapper {
+	SystemConfig selectSystemConfigById (SystemConfig systemConfig) throws Exception;
 	
 	List<SystemConfig> selectSystemConfigByConfigType(SystemConfig systemConfig) throws Exception;
 	
@@ -14,10 +15,9 @@ public interface SystemConfigMapper {
 	
     int deleteSystemConfig (SystemConfig systemConfig) throws Exception;
     
+    int updateSystemConfig(SystemConfig systemConfig) throws Exception;
 
     int insert(SystemConfig record);
-
-    int updateByPrimaryKeySelective(SystemConfig record);
 
     int updateByPrimaryKey(SystemConfig record);
 }

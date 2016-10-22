@@ -31,4 +31,14 @@ public class SystemConfigServiceImpl implements SystemConfigService{
 		return scm.deleteSystemConfig(systemConfig);
 	}
 
+	@Override
+	public SystemConfig getSystemConfigById(SystemConfig systemConfig) throws Exception {
+		return scm.selectSystemConfigById(systemConfig);
+	}
+
+	@Override
+	public int updateSystemConfig(SystemConfig systemConfig) throws Exception {
+		return scm.updateSystemConfig(systemConfig);
+	}
+
 }

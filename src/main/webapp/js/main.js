@@ -42,7 +42,7 @@ $(function(){
 function showUpdatePassword() {
 	$("#formbox").dialog({
 		title : '修改密码',
-		iconCls : "icon-ok",
+		iconCls : "icon-edit",
 		width : 300,
 		height : 280,
 		cache : false,

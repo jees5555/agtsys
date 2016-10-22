@@ -113,7 +113,7 @@ function searchUser() {
 function showAddSystemConfig(configtype){
 	$("#formbox").dialog({
 		title : '添加系统配置'+configtype,
-		iconCls : "icon-ok",
+		iconCls : "icon-edit",
 		width : 300,
 		height : 220,
 		cache : false,
@@ -136,7 +136,7 @@ function showAddSystemConfig(configtype){
 function showUpdateSystemConfig(id,configtype){
 	$("#formbox").dialog({
 		title : '修改角色',
-		iconCls : "icon-ok",
+		iconCls : "icon-edit",
 		width : 300,
 		height : 220,
 		cache : false,

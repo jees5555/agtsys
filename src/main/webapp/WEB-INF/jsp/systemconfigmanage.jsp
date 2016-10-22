@@ -10,6 +10,7 @@ $('#systemconfigdg${configtype}').datagrid({
         //<c:if test="${configtype==2 ||configtype==3 ||configtype==4||configtype==7}">
         {field:'configvalue',title:'配置数值',width:300,align:'center',}, 
         //</c:if>
+        //<c:if test="${configtype!=3 && configtype!=4}">
         {field:'isstart',title:'是否启用',width:100,align:'center',
         formatter: function(value){
         	switch(value){
@@ -25,9 +26,10 @@ $('#systemconfigdg${configtype}').datagrid({
 				}
 			}
        },
+       //</c:if>
        {field:'id',title:'操作',width:100,align:'center',
            formatter: function(value,row,index){
-        	   return "<a href='#'>修改</a>"+
+        	   return "<a href='javascript:showUpdateSystemConfig("+value+")'>修改</a>"+
         	   "<c:if test="${configtype==1 ||configtype==5 ||configtype==6||configtype==7}">"+
         	   "|"+
         	   "<a href='javascript:deleteSystemConfig("+value+",\""+row.configtypename+"\");'>删除</a>"+
@@ -47,8 +49,9 @@ $('#systemconfigdg${configtype}').datagrid({
 		handler: function(){
 			showAddSystemConfig("${configtype}");
 		        }
-	    }
+	    },
      //</c:if>
+       {}
     ]
 });  
 
@@ -57,7 +60,7 @@ $('#systemconfigdg${configtype}').datagrid({
 function showAddSystemConfig(configtype){
 	$("#formbox").dialog({
 		title : '添加系统配置'+configtype,
-		iconCls : "icon-ok",
+		iconCls : "icon-add",
 		width : 300,
 		height : 220,
 		cache : false,
@@ -66,7 +69,7 @@ function showAddSystemConfig(configtype){
 		buttons:[{
 			text:'添加',
 			handler:function(){
-				addSystemConfig(configtype);
+				addSystemConfig();
 			}
 		},{
 			text:'取消',
@@ -77,19 +80,19 @@ function showAddSystemConfig(configtype){
 	})
 }
 //载入修改页面
-function showUpdateSystemConfig(id,configtype){
-	$("#formbox").dialog({
-		title : '修改角色',
-		iconCls : "icon-ok",
+function showUpdateSystemConfig(id){
+	 $("#formbox").dialog({
+		title : '修改系统配置',
+		iconCls : "icon-edit",
 		width : 300,
 		height : 220,
 		cache : false,
-		href : 'role/update/'+row.id,
+		href : 'systemconfig/update/'+id,
 		modal : true,
 		buttons:[{
 			text:'修改',
 			handler:function(){
-				updateRole();
+				updateSystemConfig();
 			}
 		},{
 			text:'取消',
@@ -97,7 +100,7 @@ function showUpdateSystemConfig(id,configtype){
 				$("#formbox").dialog('close');
 			}
 		}]
-	}) 
+	})  
 } 
 //删除系统配置
 function deleteSystemConfig(id,configtypename) {

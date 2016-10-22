@@ -66,6 +66,25 @@ public class SystemConfigController {
     	    return OPERATE_FAILURE;
     	}
     }
+    //返回修改配置类型页面
+    @RequestMapping(value={"update/{id}"},method=RequestMethod.GET)
+    public String updateSystemConfig (@PathVariable Long id,Model model) throws Exception{
+    	SystemConfig systemConfig =new SystemConfig();
+    	systemConfig.setId(id);
+    	systemConfig=scs.getSystemConfigById(systemConfig);
+    	model.addAttribute("systemconfig", systemConfig);
+    	return "updatesystemconfig";
+    }
+  //修改配置类型
+    @RequestMapping(value={"update"},method=RequestMethod.POST)
+    @ResponseBody
+    public String doUpdateSystemConfig(SystemConfig systemConfig) throws Exception{
+    	if(scs.updateSystemConfig(systemConfig)==1){
+    		return OPERATE_SUCCESS;
+    	}else{
+    	    return OPERATE_FAILURE;
+    	}
+    }
    //删除配置类型
     @RequestMapping(value={"delete"},method=RequestMethod.POST)
     @ResponseBody

@@ -28,7 +28,7 @@ public class RoleController {
     @RequestMapping("list")
     @ResponseBody
     public Object getRoleList() throws Exception{
-    	return rs.selectAllRoles();
+    	return rs.getRoles();
     }
     //返回角色列表页面
     @RequestMapping("manage")

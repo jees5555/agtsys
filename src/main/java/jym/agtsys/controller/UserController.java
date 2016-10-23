@@ -15,6 +15,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -103,7 +104,7 @@ public class UserController {
 	//返回用户管理页面
 	@RequestMapping("manage")
 	public String getUserManage (Model model) throws Exception{
-		List<Role> roles =rs.selectAllRoles();
+		List<Role> roles =rs.getRoles();
 		model.addAttribute("roles", roles);
 		return "usermanage";
 	}
@@ -116,4 +117,68 @@ public class UserController {
 		map.put("rows", us.getPageUsersByUser(user, new MySqlPageTool(page, rows)));
 	    return map;
 	    }
+	//返回添加用户页面
+    @RequestMapping(value={"add"},method=RequestMethod.GET)
+    public String addUser (Model model) throws Exception{
+    	List<Role> roles =rs.getRoles();
+		model.addAttribute("roles", roles);
+    	return "adduser";
+    }
+    //检查登陆账号是否存在
+    @RequestMapping(value={"usercodeCheck"},method=RequestMethod.POST)
+    @ResponseBody
+    public String usercodeCheck (User user) throws Exception{
+    	user=us.checkUserExist(user);
+    	if(user==null){
+    		return OPERATE_SUCCESS;
+    	}else{
+    		return OPERATE_FAILURE;
+    	}
+    }
+  //添加用户
+    @RequestMapping(value={"add"},method=RequestMethod.POST)
+    @ResponseBody
+    public String doAddUser (User user,HttpSession session) throws Exception{
+    	User userSession =(User)session.getAttribute(SESSION_LOGIN_KEY);
+    	user.setCreationtime(new Date());
+    	user.setCreatedby(userSession.getUsercode());
+    	if(us.addUser(user)==1){
+    		return OPERATE_SUCCESS;
+    	}else{
+    		return OPERATE_FAILURE;
+    	}
+    }
+  //返回修改用户页面
+    @RequestMapping(value={"update/{id}"},method=RequestMethod.GET)
+    public String updateUser (@PathVariable(value="id")Long id,Model model) throws Exception{
+    	User user =new User();
+    	user.setId(id);
+    	user=us.checkUserExist(user);
+    	model.addAttribute("user", user);
+    	List<Role> roles =rs.getRoles();
+		model.addAttribute("roles", roles);
+    	return "updateuser";
+    }
+    //修改用户
+    @RequestMapping(value={"update"},method=RequestMethod.POST)
+    @ResponseBody
+    public String doUpdateUser (User user) throws Exception{
+    	user.setLastupdatetime(new Date());
+    	if(us.updateUser(user)==1){
+    		return OPERATE_SUCCESS;
+    	}else{
+    		return OPERATE_FAILURE;
+    	}
+    }
+    
+    //删除用户
+    @RequestMapping(value={"delete"},method=RequestMethod.POST)
+    @ResponseBody
+    public String doDeleteUser (User user) throws Exception{
+    	if(us.deleteUser(user)==1){
+    		return OPERATE_SUCCESS;
+    	}else{
+    		return OPERATE_FAILURE;
+    	}
+    }
 }

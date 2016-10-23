@@ -61,7 +61,7 @@ public class User {
     }
 
     public void setUserpassword(String userpassword) {
-        this.userpassword = (userpassword == null || userpassword.equals("")) ? null : MD5.md5encode(userpassword.trim());
+        this.userpassword = (userpassword == null || userpassword.trim().equals("")) ? null : MD5.md5encode(userpassword.trim());
     }
 
     public Date getCreationtime() {

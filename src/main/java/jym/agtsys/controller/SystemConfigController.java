@@ -37,7 +37,7 @@ public class SystemConfigController {
     public Object getSystemConfigList(@PathVariable Integer configtype) throws Exception{
     	SystemConfig sc =new SystemConfig();
     	sc.setConfigtype(configtype);
-    	return scs.getSystemConfigByConfigType(sc);
+    	return scs.getSystemConfigsByConfigType(sc);
     }
     //返回添加配置类型页面
     @RequestMapping(value={"add/{configtype}"},method=RequestMethod.GET)
@@ -49,7 +49,7 @@ public class SystemConfigController {
     @RequestMapping(value={"configtypenameCheck"},method=RequestMethod.POST)
     @ResponseBody
     public String configtypenameCheck(SystemConfig systemConfig) throws Exception{
-    	List <SystemConfig> systemConfigs=scs.getSystemConfigByConfigType(systemConfig);
+    	List <SystemConfig> systemConfigs=scs.getSystemConfigsByConfigType(systemConfig);
     	if(systemConfigs.size()==0){
     		return OPERATE_SUCCESS;
     	}else{
@@ -88,7 +88,7 @@ public class SystemConfigController {
    //删除配置类型
     @RequestMapping(value={"delete"},method=RequestMethod.POST)
     @ResponseBody
-    public String doSystemConfig (SystemConfig systemConfig) throws Exception{
+    public String doDeleteSystemConfig (SystemConfig systemConfig) throws Exception{
 	     if(scs.deleteSystemConfig(systemConfig)==1){
 		     return OPERATE_SUCCESS;
 	     }else{

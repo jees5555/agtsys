@@ -15,7 +15,7 @@ public class SystemConfigServiceImpl implements SystemConfigService{
     private SystemConfigMapper scm;
 	
 	@Override
-	public List<SystemConfig> getSystemConfigByConfigType(SystemConfig systemConfig) throws Exception  {
+	public List<SystemConfig> getSystemConfigsByConfigType(SystemConfig systemConfig) throws Exception  {
 		return scm.selectSystemConfigByConfigType(systemConfig);
 	}
 

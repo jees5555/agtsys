@@ -15,7 +15,7 @@ public class RoleServiceImpl implements RoleService{
     private RoleMapper rm;
 	
 	@Override
-	public List<Role> selectAllRoles() throws Exception {
+	public List<Role> getRoles() throws Exception {
 		return rm.selectAllRoles();
 	}
 
@@ -26,7 +26,7 @@ public class RoleServiceImpl implements RoleService{
 
 	@Override
 	public int addRole(Role role) throws Exception {
-		return rm.addRole(role);
+		return rm.insertRole(role);
 	}
 
 	@Override

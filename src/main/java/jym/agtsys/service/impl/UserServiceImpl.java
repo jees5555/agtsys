@@ -48,4 +48,19 @@ public class UserServiceImpl implements UserService{
 		return um.selectUsersCount(user);
 	}
 
+	@Override
+	public User checkUserExist(User user) throws Exception {
+		return um.selectUserByUser(user);
+	}
+
+	@Override
+	public int addUser(User user) throws Exception {
+		return um.insertUser(user);
+	}
+
+	@Override
+	public int deleteUser(User user) throws Exception {
+		return um.deleteUser(user);
+	}
+
 }

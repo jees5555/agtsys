@@ -7,13 +7,13 @@
   
   <properties>
   <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-  <spring.version>3.2.4.RELEASE</spring.version>
+  <spring.version>3.2.17.RELEASE</spring.version>
   <junit.version>4.12</junit.version>
   <slf4j.version>1.7.5</slf4j.version>
   <jackson.version>2.7.3</jackson.version>
   </properties>
   <dependencies>
-  <!-- jmokit包必须在junit之前 -->
+  <!-- jmockit包必须在junit之前 -->
         <dependency>
 			<groupId>org.jmockit</groupId>
 			<artifactId>jmockit</artifactId>

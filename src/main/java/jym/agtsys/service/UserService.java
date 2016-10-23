@@ -17,4 +17,10 @@ int getUsersCount(User user) throws Exception;
 
 int updateUser(User user)  throws Exception;
 
+User checkUserExist(User user) throws Exception;
+
+int addUser(User user) throws Exception;
+
+int deleteUser(User user) throws Exception;
+
 }

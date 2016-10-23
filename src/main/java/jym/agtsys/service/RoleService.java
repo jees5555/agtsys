@@ -6,7 +6,7 @@ import jym.agtsys.domain.Role;
 
 public interface RoleService {
 
-	List<Role> selectAllRoles () throws Exception;
+	List<Role> getRoles () throws Exception;
 	
 	Role checkRoleExist (Role role) throws Exception;
 	
@@ -14,5 +14,5 @@ public interface RoleService {
 	
 	int updateRole(Role role) throws Exception;
 	
-	  int deleteRole(Role role) throws Exception;
+	int deleteRole(Role role) throws Exception;
 }

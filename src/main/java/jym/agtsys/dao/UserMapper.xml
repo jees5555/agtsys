@@ -16,6 +16,9 @@
   <select id="selectUserByUser" parameterType="user" resultType="user">
    select * from as_user 
    <where>
+   <if test="id != null">
+    and id = #{id}
+   </if>
    <if test="usercode != null">
     and userCode = #{usercode}
    </if>
@@ -66,7 +69,7 @@
     isStart, roleId
   </sql>
   
-  <update id="updateUser" parameterType="jym.agtsys.domain.User">
+  <update id="updateUser" parameterType="user">
     update as_user
     <set>
       <if test="usercode != null">
@@ -99,31 +102,7 @@
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  
-  
-  
-  
-  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from as_user
-    where id = #{id,jdbcType=BIGINT}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
-    delete from as_user
-    where id = #{id,jdbcType=BIGINT}
-  </delete>
-  <insert id="insert" parameterType="jym.agtsys.domain.User">
-    insert into as_user (id, userCode, userName, 
-      userPassword, creationTime, lastLoginTime, 
-      createdBy, lastUpdateTime, isStart, 
-      roleId)
-    values (#{id,jdbcType=BIGINT}, #{usercode,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, 
-      #{userpassword,jdbcType=VARCHAR}, #{creationtime,jdbcType=TIMESTAMP}, #{lastlogintime,jdbcType=TIMESTAMP}, 
-      #{createdby,jdbcType=VARCHAR}, #{lastupdatetime,jdbcType=TIMESTAMP}, #{isstart,jdbcType=INTEGER}, 
-      #{roleid,jdbcType=BIGINT})
-  </insert>
-  <insert id="insertSelective" parameterType="jym.agtsys.domain.User">
+  <insert id="insertUser" parameterType="user">
     insert into as_user
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -190,6 +169,31 @@
       </if>
     </trim>
   </insert>
+  <delete id="deleteUser" parameterType="user">
+    delete from as_user
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  
+  
+  
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from as_user
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  
+  <insert id="insert" parameterType="jym.agtsys.domain.User">
+    insert into as_user (id, userCode, userName, 
+      userPassword, creationTime, lastLoginTime, 
+      createdBy, lastUpdateTime, isStart, 
+      roleId)
+    values (#{id,jdbcType=BIGINT}, #{usercode,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, 
+      #{userpassword,jdbcType=VARCHAR}, #{creationtime,jdbcType=TIMESTAMP}, #{lastlogintime,jdbcType=TIMESTAMP}, 
+      #{createdby,jdbcType=VARCHAR}, #{lastupdatetime,jdbcType=TIMESTAMP}, #{isstart,jdbcType=INTEGER}, 
+      #{roleid,jdbcType=BIGINT})
+  </insert>
+  
   <update id="updateByPrimaryKey" parameterType="jym.agtsys.domain.User">
     update as_user
     set userCode = #{usercode,jdbcType=VARCHAR},

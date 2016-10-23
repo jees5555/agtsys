@@ -35,7 +35,7 @@
       </if>
   </where>
   </select>
-   <insert id="addRole" parameterType="role">
+   <insert id="insertRole" parameterType="role">
     insert into as_role
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">

@@ -8,16 +8,16 @@
      <table class="searchTb" style="margin:auto;">
       <tr>
        <th>用户名称：</th>
-       <td><input type="text" id="username" name="username" style="height:14px"></td>
+       <td><input type="text"  id="usernamesearch" name="username" style="height:14px"></td>
        <th>角色：</th>
-       <td><select id="roleid" name="roleid">
+       <td><select id="roleidsearch"  name="roleid">
        <option selected="selected" value="">请选择</option>
        <c:forEach items="${roles }" var="role">
        <option  value="${role.id }">${role.rolename }</option>
        </c:forEach>
        </select></td>
        <th>是否启用：</th>
-       <td><select id="isstart" name="isstart">
+       <td><select id="isstartsearch"  name="isstart">
         <option selected="selected" value="">请选择</option>
         <option value="1">启用</option>
         <option value="0">未启用</option>
@@ -55,9 +55,9 @@ $('#userdg').datagrid({
        },
        {field:'id',title:'操作',width:100,align:'center',
            formatter: function(value,row,index){
-        	   return "<a href='#'>修改</a>"+
+        	   return "<a href='javascript:showUpdateUser("+value+");'>修改</a>"+
         	   "|"+
-        	   "<a href='javascript:deleteSystemConfig("+value+",\""+row.configtypename+"\");'>删除</a>";
+        	   "<a href='javascript:deleteUser("+value+",\""+row.username+"\");'>删除</a>";
          }}
     ]],
     //表格属性
@@ -75,7 +75,7 @@ $('#userdg').datagrid({
 		iconCls: 'icon-add',
 		text:'添加',
 		handler: function(){
-			showAddSystemConfig("${configtype}");
+			showAddUser();
 		        }
 	    }
      //</c:if>
@@ -97,32 +97,32 @@ function formatDate(date){
 //组合查询
 function searchUser() {
 	var user = {"username":null,"roleid":null,"isstart":null};
-	if($.trim($('#username').val())!=''){
-		user.username = $.trim($('#username').val());
+	if($.trim($('#usernamesearch').val())!=''){
+		user.username = $.trim($('#usernamesearch').val());
 	}
-	if($.trim($('#roleid').val())!=''){
-		user.roleid = $.trim($('#roleid').val());
+	if($.trim($('#roleidsearch').val())!=''){
+		user.roleid = $.trim($('#roleidsearch').val());
 	}
-	if($.trim($('#isstart').val())!=''){
-		user.isstart = $.trim($('#isstart').val());
+	if($.trim($('#isstartsearch').val())!=''){
+		user.isstart = $.trim($('#isstartsearch').val());
 	}
 	$("#userdg").datagrid('reload',user);
 }
 
 //载入添加页面
-function showAddSystemConfig(configtype){
+function showAddUser(){
 	$("#formbox").dialog({
-		title : '添加系统配置'+configtype,
-		iconCls : "icon-edit",
+		title : '添加用户',
+		iconCls : "icon-add",
 		width : 300,
-		height : 220,
+		height : 350,
 		cache : false,
-		href : 'systemconfig/add/'+configtype,
+		href : 'user/add/',
 		modal : true,
 		buttons:[{
 			text:'添加',
 			handler:function(){
-				addSystemConfig(configtype);
+				addUser();
 			}
 		},{
 			text:'取消',
@@ -133,19 +133,19 @@ function showAddSystemConfig(configtype){
 	})
 }
 //载入修改页面
-function showUpdateSystemConfig(id,configtype){
+function showUpdateUser(id){
 	$("#formbox").dialog({
-		title : '修改角色',
+		title : '修改用户',
 		iconCls : "icon-edit",
 		width : 300,
-		height : 220,
+		height : 350,
 		cache : false,
-		href : 'role/update/'+row.id,
+		href : 'user/update/'+id,
 		modal : true,
 		buttons:[{
 			text:'修改',
 			handler:function(){
-				updateRole();
+				updateUser();
 			}
 		},{
 			text:'取消',
@@ -155,22 +155,22 @@ function showUpdateSystemConfig(id,configtype){
 		}]
 	}) 
 } 
-//删除系统配置
-function deleteSystemConfig(id,configtypename) {
-	$.messager.confirm('确认','您确认想要删除配置类型['+configtypename+']吗？',function(r){    
+//删除用户
+function deleteUser(id,username) {
+	$.messager.confirm('确认','您确认想要删除用户['+username+']吗？',function(r){    
 	    if (r){    
 	    	$.ajax({
 	    		type: "post",
-	    		url : "systemconfig/delete/",
+	    		url : "user/delete/",
 	    		data : "id="+id,
 	    		dataType : "text",
 	    		async : false,
 	    		success : function(msg){
 	    			if(msg=="success"){
-	    				$("#systemconfigdg${configtype}").datagrid('reload');
-	    				$.messager.alert('删除提示','删除配置类型['+configtypename+']成功','info');
+	    				$("#userdg").datagrid('reload');
+	    				$.messager.alert('删除提示','删除用户['+username+']成功','info');
 	    			}else{
-	    				$.messager.alert('删除提示','删除配置类型['+configtypename+']失败','error');
+	    				$.messager.alert('删除提示','删除用户['+username+']失败','error');
 	    			}
 	    		}
 	    	})  

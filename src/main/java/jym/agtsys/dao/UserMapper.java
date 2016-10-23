@@ -14,14 +14,14 @@ public interface UserMapper {
 	
 	int selectUsersCount(User user) throws Exception ;
 	
-	int updateUser(User user)  throws Exception;
+	int updateUser(User user) throws Exception;
 	
+	int insertUser(User user) throws Exception;
 	
-    int deleteByPrimaryKey(Long id);
+	int deleteUser(User user) throws Exception;
+	
 
     int insert(User record);
-
-    int insertSelective(User record);
 
     User selectByPrimaryKey(Long id);
 

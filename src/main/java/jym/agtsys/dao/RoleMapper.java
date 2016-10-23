@@ -10,7 +10,7 @@ public interface RoleMapper {
 	
 	Role selectRoleByRole (Role role) throws Exception;
 	
-	int addRole(Role role) throws Exception;
+	int insertRole(Role role) throws Exception;
 	
 	int updateRole(Role role) throws Exception;
 	

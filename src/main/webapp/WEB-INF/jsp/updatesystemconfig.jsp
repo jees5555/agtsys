@@ -8,10 +8,17 @@
    <input id="configtype" name="configtype" type="hidden" value="${systemconfig.configtype }">
     <div class="h30 lh28">   
         <label for="configtypename">配置类型:</label>   
-        <input id="configtypename" class="easyui-validatebox" type="text" name="configtypename" value="${systemconfig.configtypename }"
-        <c:if test="${systemconfig.configtype==3 or systemconfig.configtype==4}"> readonly="readonly" </c:if>
-        onblur="validateConfigTypeName(${systemconfig.configtype},this.value);"
-        data-options="required:true" missingMessage="请输入配置类型"/>   
+        <c:choose>
+          <c:when test="${systemconfig.configtype==3 or systemconfig.configtype==4}">
+           <input id="configtypename" type="hidden" name="configtypename" value="${systemconfig.configtypename }"/> 
+           ${systemconfig.configtypename }
+          </c:when>
+          <c:otherwise>
+          <input id="configtypename" class="easyui-validatebox" type="text" name="configtypename" value="${systemconfig.configtypename }"
+           onblur="validateConfigTypeName(${systemconfig.configtype},this.value);"
+           data-options="required:true" missingMessage="请输入配置类型"/>   
+          </c:otherwise>
+        </c:choose>
     </div> 
    <c:if test="${systemconfig.configtype==2 or  systemconfig.configtype==3 or systemconfig.configtype==4 or systemconfig.configtype==7}">
     <div class="h30 lh28">   

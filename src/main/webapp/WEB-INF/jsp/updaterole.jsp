@@ -43,6 +43,9 @@ function validateRoleName(rolename){
 			}else{
 				$("#errors").html("<p style='color: red'>角色名称["+$('#rolename').val()+"]已经存在</p>");
 			}
+		},
+		error : function() {
+			$("#errors").html("<p style='color: red'>服务器异常，数据校验失败</p>");
 		}
 	})
 	return flag;
@@ -63,6 +66,9 @@ function updateRole() {
 					}else{
 						$.messager.alert('修改提示','修改角色['+$("#rolename").val()+']失败！','error')
 					}
+				},
+				error : function() {
+					$.messager.alert('错误','服务器异常！','error');
 				}
 			})
 		}	

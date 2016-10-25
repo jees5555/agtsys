@@ -16,7 +16,7 @@ public class FunctionServiceImpl implements FunctionService{
 	private FunctionMapper fm;
 
 	@Override
-	public List<Function> selectFuntionsByRole(Role role) throws Exception {
+	public List<Function> getFuntionsByRole(Role role) throws Exception {
 		return fm.selectFuntionsByRole(role);
 	}
 

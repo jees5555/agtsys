@@ -60,6 +60,9 @@ $('#userdg').datagrid({
         	   "<a href='javascript:deleteUser("+value+",\""+row.username+"\");'>删除</a>";
          }}
     ]],
+    onLoadError:function(){
+		$.messager.alert('错误',"服务器异常，数据加载失败！",'error');
+	},
     //表格属性
     fitColumns : true,
 	rownumbers : true,
@@ -129,7 +132,10 @@ function showAddUser(){
 			handler:function(){
 				$("#formbox").dialog('close');
 			}
-		}]
+		}],
+	    onLoadError:function(){
+			$.messager.alert('错误',"服务器异常，数据加载失败！",'error');
+		}
 	})
 }
 //载入修改页面
@@ -152,7 +158,10 @@ function showUpdateUser(id){
 			handler:function(){
 				$("#formbox").dialog('close');
 			}
-		}]
+		}],
+	    onLoadError:function(){
+			$.messager.alert('错误',"服务器异常，数据加载失败！",'error');
+		}
 	}) 
 } 
 //删除用户
@@ -172,7 +181,10 @@ function deleteUser(id,username) {
 	    			}else{
 	    				$.messager.alert('删除提示','删除用户['+username+']失败','error');
 	    			}
-	    		}
+	    		},
+				error : function() {
+					$.messager.alert('错误','服务器异常！','error');
+				}
 	    	})  
 	    }    
 	});   

@@ -38,7 +38,7 @@ public class MainController {
 		User user =(User) session.getAttribute(SESSION_LOGIN_KEY);
 		Role role =new Role();
 		role.setId(user.getRoleid());
-		List<Function> functions= fs.selectFuntionsByRole(role);
+		List<Function> functions= fs.getFuntionsByRole(role);
 		List<EasyUINode> nodes =new ArrayList<EasyUINode> ();
 		functionToEasyUINode(functions, nodes, 0);
 		return nodes;

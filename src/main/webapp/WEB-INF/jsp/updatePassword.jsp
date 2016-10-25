@@ -46,6 +46,9 @@ function validateOldPwd(oldpassword){
 			}else{
 				$("#errors").html("<p style='color: red'>旧密码错误</p>");
 			}
+		},
+		error : function() {
+			$("#errors").html("<p style='color: red'>服务器异常，数据校验失败</p>");
 		}
 	})
 	return flag;
@@ -64,6 +67,9 @@ function updatePassword() {
 					}else{
 						$.messager.alert('修改提示','修改密码失败！','error')
 					}
+				},
+				error : function() {
+					$.messager.alert('错误','服务器异常！','error');
 				}
 			})
 		}	

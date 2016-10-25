@@ -47,6 +47,9 @@ function validateConfigTypeName(configtype,configtypename){
 			}else{
 				$("#errors").html("<p style='color: red'>配置类型["+$('#configtypename').val()+"]已经存在</p>");
 			}
+		},
+		error : function() {
+			$("#errors").html("<p style='color: red'>服务器异常，数据校验失败</p>");
 		}
 	})
 	return flag;
@@ -67,6 +70,9 @@ function addSystemConfig() {
 					}else{
 						$.messager.alert('添加提示','添加配置类型['+$("#configtypename").val()+']失败！','error')
 					}
+				},
+				error : function() {
+					$.messager.alert('错误','服务器异常！','error');
 				}
 			}) 
 		}	

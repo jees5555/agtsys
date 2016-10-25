@@ -26,6 +26,9 @@ $('#roledg').datagrid({
 			}
        }
     ]],
+    onLoadError:function(){
+		$.messager.alert('错误',"服务器异常，数据加载失败！",'error');
+	},
     //表格属性
     fitColumns : true,
     singleSelect: true,   
@@ -98,7 +101,10 @@ function showAddRole(){
 			handler:function(){
 				$("#formbox").dialog('close');
 			}
-		}]
+		}],
+	    onLoadError:function(){
+			$.messager.alert('错误',"服务器异常，数据加载失败！",'error');
+		}
 	})
 }
 //载入修改页面
@@ -121,7 +127,10 @@ function showUpdateRole(row){
 			handler:function(){
 				$("#formbox").dialog('close');
 			}
-		}]
+		}],
+	    onLoadError:function(){
+			$.messager.alert('错误',"服务器异常，数据加载失败！",'error');
+		}
 	})
 }
 //删除角色
@@ -139,6 +148,9 @@ function deleteRole(row) {
 			}else{
 				$.messager.alert('删除提示','删除角色['+row.rolename+']失败','error');
 			}
+		},
+		error : function() {
+			$.messager.alert('错误','服务器异常！','error');
 		}
 	})
 }

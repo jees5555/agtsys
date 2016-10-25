@@ -46,6 +46,9 @@ $(function() {
 				}else{
 					$("#errors").html("<p style='color: red'>验证码错误</p>");
 				}
+			},
+			error : function() {
+				$("#errors").html("<p style='color: red'>服务器异常，数据校验失败</p>");
 			}
 		})
 	}

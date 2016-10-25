@@ -58,6 +58,9 @@ function validateUserCode(usercode){
 			}else{
 				$("#errors").html("<p style='color: red'>用户["+$('#usercode').val()+"]已经存在</p>");
 			}
+		},
+		error : function() {
+			$("#errors").html("<p style='color: red'>服务器异常，数据校验失败</p>");
 		}
 	})
 	return flag;
@@ -78,6 +81,9 @@ function addUser() {
 					}else{
 						$.messager.alert('添加提示','添加用户['+$("#usercode").val()+']失败！','error')
 					}
+				},
+				error : function() {
+					$.messager.alert('错误','服务器异常！','error');
 				}
 			})
 		}	

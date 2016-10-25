@@ -24,6 +24,9 @@ $(function(){
 				}
 			});
 		},
+		onLoadError:function(error){
+			$.messager.alert('错误','服务器异常，数据加载失败！','error');
+		},
 		onClick: function(node){
 		   if(node.attributes.url!=""){
 			//判断选项卡是否存在，存在则选中
@@ -58,7 +61,10 @@ function showUpdatePassword() {
 			handler:function(){
 				$("#formbox").dialog('close');
 			}
-		}]
+		}],
+	    onLoadError:function(){
+			$.messager.alert('错误',"服务器异常，数据加载失败！",'error');
+		}
 	})
 }
 
@@ -77,6 +83,9 @@ function createTab(node){
 	        	tab.panel('refresh');
  
 	        }    
-	    }]    
+	    }],
+	    onLoadError:function(){
+			$.messager.alert('错误',"服务器异常，数据加载失败！",'error');
+		},    
 	});  
 }

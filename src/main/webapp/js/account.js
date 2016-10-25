@@ -59,14 +59,14 @@ $("#caiwuok").click(function(){
 		} 
 		$.messager.confirm('确认', '您确定要执行当前财务操作吗？', function(r){
 			if (r){
-				$.post('account/operateAccount',
-					{
+				$.post('account/operateAccount',{
 					'userid':$("#searchUserId").val(),
 					'money':$("#money").val(),
 					'detailtype':$("#accounttype").val(),
 					'detailtypename':$("#accounttype option:selected").text(),
 					'memo':$("#memo").val()
-					},function(result){
+					},
+					function(result){
 					if(result == 'success'){
 						$.messager.alert('提示','恭喜您，财务操作成功。','info');
 						$("#systemtip").html("恭喜您，财务操作成功。");
@@ -74,7 +74,9 @@ $("#caiwuok").click(function(){
 						$.messager.alert('提示','对不起，当前财务操作失败。','error');
 						$("#systemtip").html("对不起，当前财务操作失败。");
 					}
-				},'text');
+				},'text').error(function(){
+					$.messager.alert('错误','服务器异常！','error');
+				});
 			}
 		});
 	}	

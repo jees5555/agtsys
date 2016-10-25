@@ -36,6 +36,9 @@ $('#systemconfigdg${configtype}').datagrid({
         	   "</c:if>";
          }}
     ]],
+    onLoadError:function(){
+		$.messager.alert('错误',"服务器异常，数据加载失败！",'error');
+	},
     //表格属性
     fitColumns : true,
     singleSelect: true,
@@ -76,7 +79,10 @@ function showAddSystemConfig(configtype){
 			handler:function(){
 				$("#formbox").dialog('close');
 			}
-		}]
+		}],
+	    onLoadError:function(){
+			$.messager.alert('错误',"服务器异常，数据加载失败！",'error');
+		}
 	})
 }
 //载入修改页面
@@ -99,7 +105,10 @@ function showUpdateSystemConfig(id){
 			handler:function(){
 				$("#formbox").dialog('close');
 			}
-		}]
+		}],
+	    onLoadError:function(){
+			$.messager.alert('错误',"服务器异常，数据加载失败！",'error');
+		}
 	})  
 } 
 //删除系统配置
@@ -119,7 +128,10 @@ function deleteSystemConfig(id,configtypename) {
 	    			}else{
 	    				$.messager.alert('删除提示','删除配置类型['+configtypename+']失败','error');
 	    			}
-	    		}
+	    		},
+				error : function() {
+					$.messager.alert('错误','服务器异常！','error');
+				}
 	    	})  
 	    }    
 	});   

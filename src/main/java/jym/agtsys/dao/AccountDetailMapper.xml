@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jym.agtsys.dao.AccountDetailMapper">
+  <resultMap id="BaseResultMap" type="jym.agtsys.domain.AccountDetail">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="userId" jdbcType="BIGINT" property="userid" />
+    <result column="detailType" jdbcType="BIGINT" property="detailtype" />
+    <result column="detailTypeName" jdbcType="VARCHAR" property="detailtypename" />
+    <result column="money" jdbcType="DOUBLE" property="money" />
+    <result column="accountMoney" jdbcType="DOUBLE" property="accountmoney" />
+    <result column="memo" jdbcType="CHAR" property="memo" />
+    <result column="detailDateTime" jdbcType="TIMESTAMP" property="detaildatetime" />
+  </resultMap>
+  
+  <insert id="insertAccountDetail" parameterType="accountDetail">
+    insert into as_accountdetail
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="userid != null">
+        userId,
+      </if>
+      <if test="detailtype != null">
+        detailType,
+      </if>
+      <if test="detailtypename != null">
+        detailTypeName,
+      </if>
+      <if test="money != null">
+        money,
+      </if>
+      <if test="accountmoney != null">
+        accountMoney,
+      </if>
+      <if test="memo != null">
+        memo,
+      </if>
+      <if test="detaildatetime != null">
+        detailDateTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="userid != null">
+        #{userid,jdbcType=BIGINT},
+      </if>
+      <if test="detailtype != null">
+        #{detailtype,jdbcType=BIGINT},
+      </if>
+      <if test="detailtypename != null">
+        #{detailtypename,jdbcType=VARCHAR},
+      </if>
+      <if test="money != null">
+        #{money,jdbcType=DOUBLE},
+      </if>
+      <if test="accountmoney != null">
+        #{accountmoney,jdbcType=DOUBLE},
+      </if>
+      <if test="memo != null">
+        #{memo,jdbcType=CHAR},
+      </if>
+      <if test="detaildatetime != null">
+        #{detaildatetime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  
+  <sql id="Base_Column_List">
+    id, userId, detailType, detailTypeName, money, accountMoney, memo, detailDateTime
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from as_accountdetail
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from as_accountdetail
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="jym.agtsys.domain.AccountDetail">
+    insert into as_accountdetail (id, userId, detailType, 
+      detailTypeName, money, accountMoney, 
+      memo, detailDateTime)
+    values (#{id,jdbcType=BIGINT}, #{userid,jdbcType=BIGINT}, #{detailtype,jdbcType=BIGINT}, 
+      #{detailtypename,jdbcType=VARCHAR}, #{money,jdbcType=DOUBLE}, #{accountmoney,jdbcType=DOUBLE}, 
+      #{memo,jdbcType=CHAR}, #{detaildatetime,jdbcType=TIMESTAMP})
+  </insert>
+  
+  <update id="updateByPrimaryKeySelective" parameterType="jym.agtsys.domain.AccountDetail">
+    update as_accountdetail
+    <set>
+      <if test="userid != null">
+        userId = #{userid,jdbcType=BIGINT},
+      </if>
+      <if test="detailtype != null">
+        detailType = #{detailtype,jdbcType=BIGINT},
+      </if>
+      <if test="detailtypename != null">
+        detailTypeName = #{detailtypename,jdbcType=VARCHAR},
+      </if>
+      <if test="money != null">
+        money = #{money,jdbcType=DOUBLE},
+      </if>
+      <if test="accountmoney != null">
+        accountMoney = #{accountmoney,jdbcType=DOUBLE},
+      </if>
+      <if test="memo != null">
+        memo = #{memo,jdbcType=CHAR},
+      </if>
+      <if test="detaildatetime != null">
+        detailDateTime = #{detaildatetime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="jym.agtsys.domain.AccountDetail">
+    update as_accountdetail
+    set userId = #{userid,jdbcType=BIGINT},
+      detailType = #{detailtype,jdbcType=BIGINT},
+      detailTypeName = #{detailtypename,jdbcType=VARCHAR},
+      money = #{money,jdbcType=DOUBLE},
+      accountMoney = #{accountmoney,jdbcType=DOUBLE},
+      memo = #{memo,jdbcType=CHAR},
+      detailDateTime = #{detaildatetime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

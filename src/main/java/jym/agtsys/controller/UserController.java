@@ -142,7 +142,7 @@ public class UserController {
     	User userSession =(User)session.getAttribute(SESSION_LOGIN_KEY);
     	user.setCreationtime(new Date());
     	user.setCreatedby(userSession.getUsercode());
-    	if(us.addUser(user)==1){
+    	if(us.TXaddUser(user)==1){
     		return OPERATE_SUCCESS;
     	}else{
     		return OPERATE_FAILURE;
@@ -175,7 +175,7 @@ public class UserController {
     @RequestMapping(value={"delete"},method=RequestMethod.POST)
     @ResponseBody
     public String doDeleteUser (User user) throws Exception{
-    	if(us.deleteUser(user)==1){
+    	if(us.TXdeleteUser(user)==1){
     		return OPERATE_SUCCESS;
     	}else{
     		return OPERATE_FAILURE;

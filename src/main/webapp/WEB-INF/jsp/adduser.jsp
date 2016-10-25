@@ -22,7 +22,7 @@
      <div class="h30 lh28"> <label for="defaultpassword"><font color="red">默认初始密码123456</font></label></div>
      <div class="h30 lh28">   
        <label for="roleid">&ensp;角&emsp;色&ensp;:</label>   
-       <select id="roleid"  name="roleid">
+       <select id="roleid" class="easyui-validatebox" name="roleid" data-options="required:true" missingMessage="请选择角色">
        <option selected="selected" value="">请选择</option>
        <c:forEach items="${roles }" var="role">
        <option  value="${role.id }">${role.rolename }</option>
@@ -66,10 +66,6 @@ function validateUserCode(usercode){
 //添加用户
 function addUser() {
 	if($("#formbox").form('validate')){
-		if($("#roleid").val()==""){
-			$("#errors").html("<p style='color: red'>请选择角色</p>");
-			return;
-		}
 		//验证用户账户是否存在
 		if(validateUserCode($("#usercode").val())){
 			//添加角色

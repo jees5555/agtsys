@@ -6,7 +6,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import jym.agtsys.dao.AccountMapper;
 import jym.agtsys.dao.UserMapper;
+import jym.agtsys.domain.Account;
 import jym.agtsys.domain.User;
 import jym.agtsys.service.UserService;
 import jym.agtsys.util.MySqlPageTool;
@@ -15,6 +17,8 @@ import jym.agtsys.util.MySqlPageTool;
 public class UserServiceImpl implements UserService{
     @Autowired
     private UserMapper um;
+    @Autowired
+    private AccountMapper am;
 	
 	@Override
 	public User login(User user) throws Exception {
@@ -54,12 +58,18 @@ public class UserServiceImpl implements UserService{
 	}
 
 	@Override
-	public int addUser(User user) throws Exception {
-		return um.insertUser(user);
+	public int TXaddUser(User user) throws Exception {
+		um.insertUser(user);
+		Account account =new Account();
+		account.setUserid(user.getId());
+		return am.insertAccount(account);
 	}
 
 	@Override
-	public int deleteUser(User user) throws Exception {
+	public int TXdeleteUser(User user) throws Exception {
+		Account account = new Account();
+		account.setUserid(user.getId());
+		am.deleteAccount(account);
 		return um.deleteUser(user);
 	}
 

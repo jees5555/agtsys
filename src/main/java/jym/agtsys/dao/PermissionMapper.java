@@ -1,15 +1,18 @@
 package jym.agtsys.dao;
 
+import java.util.List;
+
 import jym.agtsys.domain.Permission;
+import jym.agtsys.domain.Role;
 
 public interface PermissionMapper {
-    int deleteByPrimaryKey(Long id);
+	int insertPermission(Permission permission) throws Exception;
+	
+    int deletePermission(Permission permission) throws Exception;
+    
+    List<Permission> selectPermissionByRole(Role role)throws Exception;
 
     int insert(Permission record);
-
-    int insertSelective(Permission record);
-
-    Permission selectByPrimaryKey(Long id);
 
     int updateByPrimaryKeySelective(Permission record);
 

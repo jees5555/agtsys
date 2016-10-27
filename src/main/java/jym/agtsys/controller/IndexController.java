@@ -6,9 +6,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 public class IndexController {
+	
+	@RequestMapping(value={"/"},method=RequestMethod.GET)
+	public String tologin(){
+		return "redirect:/login";
+	}
 
 	//进入登陆页面
-		@RequestMapping(value={"login","/","index"},method=RequestMethod.GET)
+		@RequestMapping(value={"login"},method=RequestMethod.GET)
 		public String login(){
 			return "login";
 		}

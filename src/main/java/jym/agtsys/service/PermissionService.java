@@ -1,5 +1,12 @@
 package jym.agtsys.service;
 
-public interface PermissionService {
+import java.util.List;
 
+import jym.agtsys.domain.Permission;
+import jym.agtsys.domain.Role;
+
+public interface PermissionService {
+   int TXoperatePermission(Permission permission) throws Exception;
+   
+   List<Permission> getPermissionByRole(Role role)throws Exception;
 }

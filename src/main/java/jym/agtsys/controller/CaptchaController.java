@@ -29,7 +29,6 @@ public class CaptchaController {
 		session.setAttribute(SESSION_CAPTCHA_KEY, captcha);
 		os.flush();
 		os.close();
-		
 	}
 	
 	@ResponseBody

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="jym.agtsys.dao.PermissionMapper">
+   <cache type="org.mybatis.caches.ehcache.EhcacheCache"/>
   <resultMap id="BaseResultMap" type="jym.agtsys.domain.Permission">
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="roleId" jdbcType="BIGINT" property="roleid" />
@@ -10,28 +11,7 @@
     <result column="lastUpdateTime" jdbcType="TIMESTAMP" property="lastupdatetime" />
     <result column="isStart" jdbcType="INTEGER" property="isstart" />
   </resultMap>
-  <sql id="Base_Column_List">
-    id, roleId, functionId, creationTime, createdBy, lastUpdateTime, isStart
-  </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from as_role_permission
-    where id = #{id,jdbcType=BIGINT}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
-    delete from as_role_permission
-    where id = #{id,jdbcType=BIGINT}
-  </delete>
-  <insert id="insert" parameterType="jym.agtsys.domain.Permission">
-    insert into as_role_permission (id, roleId, functionId, 
-      creationTime, createdBy, lastUpdateTime, 
-      isStart)
-    values (#{id,jdbcType=BIGINT}, #{roleid,jdbcType=BIGINT}, #{functionid,jdbcType=BIGINT}, 
-      #{creationtime,jdbcType=TIMESTAMP}, #{createdby,jdbcType=VARCHAR}, #{lastupdatetime,jdbcType=TIMESTAMP}, 
-      #{isstart,jdbcType=INTEGER})
-  </insert>
-  <insert id="insertSelective" parameterType="jym.agtsys.domain.Permission">
+  <insert id="insertPermission" parameterType="permission">
     insert into as_role_permission
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -80,6 +60,31 @@
       </if>
     </trim>
   </insert>
+   <delete id="deletePermission" parameterType="permission">
+    delete from as_role_permission
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <select id="selectPermissionByRole" parameterType="role" resultType="permission" >
+    SELECT as_role_permission.*,as_function.functionName,as_function.funcUrl FROM as_role_permission INNER JOIN as_function ON as_role_permission.functionId=as_function.id 
+    <where>
+    roleId=#{id}
+    </where>
+  </select>
+  
+  <sql id="Base_Column_List">
+    id, roleId, functionId, creationTime, createdBy, lastUpdateTime, isStart
+  </sql>
+  
+ 
+  <insert id="insert" parameterType="jym.agtsys.domain.Permission">
+    insert into as_role_permission (id, roleId, functionId, 
+      creationTime, createdBy, lastUpdateTime, 
+      isStart)
+    values (#{id,jdbcType=BIGINT}, #{roleid,jdbcType=BIGINT}, #{functionid,jdbcType=BIGINT}, 
+      #{creationtime,jdbcType=TIMESTAMP}, #{createdby,jdbcType=VARCHAR}, #{lastupdatetime,jdbcType=TIMESTAMP}, 
+      #{isstart,jdbcType=INTEGER})
+  </insert>
+  
   <update id="updateByPrimaryKeySelective" parameterType="jym.agtsys.domain.Permission">
     update as_role_permission
     <set>

@@ -37,4 +37,15 @@
 </bean>
 <!-- 全局异常处理 -->
 <bean class="jym.agtsys.exception.GlobalExceptionHandler"/>
+<!-- 拦截器  -->
+<mvc:interceptors>
+	<mvc:interceptor>
+			<mvc:mapping path="/**"/>
+			<bean class="jym.agtsys.intercepter.LoginIntercepter"/>
+     </mvc:interceptor>
+    <mvc:interceptor>
+			<mvc:mapping path="/**"/>
+			<bean class="jym.agtsys.intercepter.PermissionInterceptor"></bean>
+	</mvc:interceptor>
+</mvc:interceptors>
 </beans>

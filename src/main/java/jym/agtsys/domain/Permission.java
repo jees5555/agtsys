@@ -16,6 +16,10 @@ public class Permission {
     private Date lastupdatetime;
 
     private Integer isstart;
+    
+    private String functionname;
+    
+    private String funcurl;
 
     public Long getId() {
         return id;
@@ -72,4 +76,21 @@ public class Permission {
     public void setIsstart(Integer isstart) {
         this.isstart = isstart;
     }
+
+	public String getFunctionname() {
+		return functionname;
+	}
+
+	public void setFunctionname(String functionname) {
+		this.functionname = functionname;
+	}
+
+	public String getFuncurl() {
+		return funcurl;
+	}
+
+	public void setFuncurl(String funcurl) {
+		this.funcurl = funcurl;
+	}
+    
 }

@@ -27,8 +27,9 @@ $(function() {
 	})
 	//刷新验证码
 	  $("#captchaButton").click(function(){
-	      $("#captchaImg").attr("src","captcha/get?random="+Math.random());
-	      $("#errors").html("");
+		  changeCaptcha();
+	     $("#captchaImg").attr("src","captcha/get?random="+Math.random());
+	     $("#errors").html("");
 	})
 	//ajax判断验证码是否正确
 	$("#captcha").keyup(function(){

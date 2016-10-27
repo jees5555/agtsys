@@ -41,7 +41,7 @@
         <label for="captcha">验证码:</label>   
         <input id="captcha" maxlength="4" class="easyui-validatebox" type="text" name="captcha" data-options="required:true" missingMessage="请输入验证码"/>
         <img id="captchaImg" src="captcha/get">
-    <a id="captchaButton" href="#">换一张</a> 
+    <a id="captchaButton" href="javascript:">换一张</a> 
     </div> 
        
 </form>  

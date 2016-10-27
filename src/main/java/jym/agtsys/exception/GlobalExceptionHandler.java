@@ -14,6 +14,11 @@ public class GlobalExceptionHandler implements HandlerExceptionResolver {
 	public ModelAndView resolveException(HttpServletRequest request, HttpServletResponse response, Object handler,
 			Exception ex) {
 		ModelAndView mv = new ModelAndView();
+		if(ex instanceof AccessDeniedException){
+			mv.setViewName("nonajaxexception");
+			mv.addObject(OPERATE_EXCEPTION,ex.getMessage());
+			return mv;
+		}
 		//判断是否是ajax请求
 		if(request.getHeader("X-Requested-With")!=null){
 			mv.setViewName("ajaxexception");

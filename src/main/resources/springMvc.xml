@@ -11,7 +11,7 @@
 
 <!-- 写controller bean 不需要引用 id可省略 name 就是浏览器上的访问地址-->
 
-<context:component-scan base-package="jym.agtsys.controller" />
+<context:component-scan base-package="com.github.jees5555.agtsys.controller" />
 
 <!-- 数据校验验证器 -->
 <bean id="messageSourse" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
@@ -36,16 +36,16 @@
 	<property name="suffix" value=".jsp"/>
 </bean>
 <!-- 全局异常处理 -->
-<bean class="jym.agtsys.exception.GlobalExceptionHandler"/>
+<bean class="com.github.jees5555.agtsys.exception.GlobalExceptionHandler"/>
 <!-- 拦截器  -->
 <mvc:interceptors>
 	<mvc:interceptor>
 			<mvc:mapping path="/**"/>
-			<bean class="jym.agtsys.intercepter.LoginIntercepter"/>
+			<bean class="com.github.jees5555.agtsys.intercepter.LoginIntercepter"/>
      </mvc:interceptor>
     <mvc:interceptor>
 			<mvc:mapping path="/**"/>
-			<bean class="jym.agtsys.intercepter.PermissionInterceptor"></bean>
+			<bean class="com.github.jees5555.agtsys.intercepter.PermissionInterceptor"></bean>
 	</mvc:interceptor>
 </mvc:interceptors>
 </beans>

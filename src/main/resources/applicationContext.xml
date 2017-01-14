@@ -35,15 +35,15 @@
 </bean>
 <!-- 自动配置Mapper-->
 <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-<property name="basePackage" value="jym.agtsys.dao"/>
+<property name="basePackage" value="com.github.jees5555.agtsys.dao"/>
 </bean>
 <!-- DaoConfig End -->
 
 <!-- ServiceConfig Start -->
 <!-- 注解配置service -->
-<context:component-scan base-package="jym.agtsys.service"/>
+<context:component-scan base-package="com.github.jees5555.agtsys.service"/>
 <!-- 验证码组件 -->
-<bean class="jym.agtsys.util.DefaultImageCaptcha" />
+<bean class="com.github.jees5555.agtsys.util.DefaultImageCaptcha" />
 <!-- 配置事务管理 -->
 <!-- 配置transactionManager -->
 <bean id="transactionManager"  class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
@@ -57,7 +57,7 @@
 </tx:advice>
 <!-- 配置AOP切面 -->
 <aop:config>
-<aop:pointcut expression="execution(public * jym.agtsys.service..*.*(..))" id="servicePointcut"/>
+<aop:pointcut expression="execution(public * com.github.jees5555.agtsys.service..*.*(..))" id="servicePointcut"/>
 <aop:advisor advice-ref="transactionAdvice" pointcut-ref="servicePointcut"/>
 </aop:config>
 <!-- ServiceConfig End -->

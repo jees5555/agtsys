@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.github.jees5555.agtsys.dao.UserMapper">
+  <resultMap id="BaseResultMap" type="com.github.jees5555.agtsys.domain.User">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="userCode" jdbcType="VARCHAR" property="usercode" />
+    <result column="userName" jdbcType="VARCHAR" property="username" />
+    <result column="userPassword" jdbcType="VARCHAR" property="userpassword" />
+    <result column="creationTime" jdbcType="TIMESTAMP" property="creationtime" />
+    <result column="lastLoginTime" jdbcType="TIMESTAMP" property="lastlogintime" />
+    <result column="createdBy" jdbcType="VARCHAR" property="createdby" />
+    <result column="lastUpdateTime" jdbcType="TIMESTAMP" property="lastupdatetime" />
+    <result column="isStart" jdbcType="INTEGER" property="isstart" />
+    <result column="roleId" jdbcType="BIGINT" property="roleid" />
+  </resultMap>
+  <select id="selectUserByUser" parameterType="user" resultType="user">
+   select * from as_user 
+   <where>
+   <if test="id != null">
+    and id = #{id}
+   </if>
+   <if test="usercode != null">
+    and userCode = #{usercode}
+   </if>
+   <if test="userpassword != null">
+    and userPassword = #{userpassword}
+   </if>
+   </where>
+  </select>
+  <!-- 分页条件查询 -->
+  <select id="selectPageUsersByUser" resultType="user">
+  select as_user.*,as_role.rolename from as_user inner join as_role on as_user.roleid=as_role.id
+   <if test="user !=null">
+    <where>
+      <if test="user.usercode != null">
+       and usercode like concat('%',#{user.usercode},'%') 
+      </if>
+      <if test="user.isstart != null">
+        and as_user.isstart = #{user.isstart}
+      </if>
+      <if test="user.username != null">
+        and username like concat('%',#{user.username},'%') 
+      </if>
+       <if test="user.roleid != null">
+        and roleid = #{user.roleid}
+      </if>
+   </where>
+    </if>
+   <if test="pageTool != null">
+     limit #{pageTool.start},#{pageTool.size}
+   </if>
+  </select>
+  <!-- 分页总记录数条件查询 -->
+  <select id="selectUsersCount" parameterType="user" resultType="int">
+  select count(*)from as_user
+    <where>
+      <if test="isstart != null">
+        and isstart = #{isstart}
+      </if>
+      <if test="username != null">
+        and username like concat('%',#{username},'%') 
+      </if>
+       <if test="roleid != null">
+        and roleid = #{roleid}
+      </if>
+   </where>
+  </select>
+  
+  
+  <sql id="Base_Column_List">
+    id, userCode, userName, userPassword, creationTime, lastLoginTime, createdBy, lastUpdateTime, 
+    isStart, roleId
+  </sql>
+  
+  <update id="updateUser" parameterType="user">
+    update as_user
+    <set>
+      <if test="usercode != null">
+        userCode = #{usercode,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null">
+        userName = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="userpassword != null">
+        userPassword = #{userpassword,jdbcType=VARCHAR},
+      </if>
+      <if test="creationtime != null">
+        creationTime = #{creationtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastlogintime != null">
+        lastLoginTime = #{lastlogintime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createdby != null">
+        createdBy = #{createdby,jdbcType=VARCHAR},
+      </if>
+      <if test="lastupdatetime != null">
+        lastUpdateTime = #{lastupdatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isstart != null">
+        isStart = #{isstart,jdbcType=INTEGER},
+      </if>
+      <if test="roleid != null">
+        roleId = #{roleid,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <insert id="insertUser" parameterType="user">
+    insert into as_user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="usercode != null">
+        userCode,
+      </if>
+      <if test="username != null">
+        userName,
+      </if>
+      <if test="userpassword != null">
+        userPassword,
+      </if>
+      <if test="creationtime != null">
+        creationTime,
+      </if>
+      <if test="lastlogintime != null">
+        lastLoginTime,
+      </if>
+      <if test="createdby != null">
+        createdBy,
+      </if>
+      <if test="lastupdatetime != null">
+        lastUpdateTime,
+      </if>
+      <if test="isstart != null">
+        isStart,
+      </if>
+      <if test="roleid != null">
+        roleId,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="usercode != null">
+        #{usercode,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null">
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="userpassword != null">
+        #{userpassword,jdbcType=VARCHAR},
+      </if>
+      <if test="creationtime != null">
+        #{creationtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastlogintime != null">
+        #{lastlogintime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createdby != null">
+        #{createdby,jdbcType=VARCHAR},
+      </if>
+      <if test="lastupdatetime != null">
+        #{lastupdatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isstart != null">
+        #{isstart,jdbcType=INTEGER},
+      </if>
+      <if test="roleid != null">
+        #{roleid,jdbcType=BIGINT},
+      </if>
+    </trim>
+    <selectKey order="AFTER" keyProperty="id" resultType="long" >
+    	select LAST_INSERT_ID() as id
+    </selectKey>
+  </insert>
+  <delete id="deleteUser" parameterType="user">
+    delete from as_user
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  
+  
+  
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from as_user
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  
+  <insert id="insert" parameterType="com.github.jees5555.agtsys.domain.User">
+    insert into as_user (id, userCode, userName, 
+      userPassword, creationTime, lastLoginTime, 
+      createdBy, lastUpdateTime, isStart, 
+      roleId)
+    values (#{id,jdbcType=BIGINT}, #{usercode,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, 
+      #{userpassword,jdbcType=VARCHAR}, #{creationtime,jdbcType=TIMESTAMP}, #{lastlogintime,jdbcType=TIMESTAMP}, 
+      #{createdby,jdbcType=VARCHAR}, #{lastupdatetime,jdbcType=TIMESTAMP}, #{isstart,jdbcType=INTEGER}, 
+      #{roleid,jdbcType=BIGINT})
+  </insert>
+  
+  <update id="updateByPrimaryKey" parameterType="com.github.jees5555.agtsys.domain.User">
+    update as_user
+    set userCode = #{usercode,jdbcType=VARCHAR},
+      userName = #{username,jdbcType=VARCHAR},
+      userPassword = #{userpassword,jdbcType=VARCHAR},
+      creationTime = #{creationtime,jdbcType=TIMESTAMP},
+      lastLoginTime = #{lastlogintime,jdbcType=TIMESTAMP},
+      createdBy = #{createdby,jdbcType=VARCHAR},
+      lastUpdateTime = #{lastupdatetime,jdbcType=TIMESTAMP},
+      isStart = #{isstart,jdbcType=INTEGER},
+      roleId = #{roleid,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

@@ -4,6 +4,6 @@
 <configuration>
     <!-- 别名 指向实体类包-->
     <typeAliases>
-    <package name="jym.agtsys.domain"/>
+    <package name="com.github.jees5555.agtsys.domain"/>
     </typeAliases>
 </configuration>

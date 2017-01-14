@@ -19,9 +19,11 @@ $('#roledg').datagrid({
         		return "启用"
         	}
           },
-          styler: function(value,row,index){
-				if (value ==0){
-					return 'background-color:#ffee00;color:red;';
+			styler : function(value, row, index) {
+				if (value == 0) {
+					return 'color:red;';
+				} else {
+					return 'color:green;';
 				}
 			}
        }

@@ -16,7 +16,7 @@
 			</ul>
 		</li>
 		<li class="iframeli">
-			<table id="permission_dg"></table>
+			<table id="permissiondg"></table>
 		</li>
 	</ul>
 </div>
